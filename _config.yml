@@ -2,8 +2,8 @@
 title: Tangential Labs
 description: > # this means to ignore newlines until "baseurl:"
   A software dev with a penchant for game and server-side code.
-baseurl: "/j3hyde" # the subpath of your site, e.g. /blog/
-url: "http://j3hyde.github.io/j3hyde" # the base hostname & protocol for your site
+baseurl: "/" # the subpath of your site, e.g. /blog/
+url: "http://j3hyde.github.io/" # the base hostname & protocol for your site
 twitter_username: j3hyde
 github_username:  j3hyde
 
