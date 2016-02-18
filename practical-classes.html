@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>Tangential Labs</title>
+        <title>"Practical Classes"</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
         <link href="/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Tangential Labs Atom Feed" />
 
@@ -15,13 +15,18 @@
         <header id="banner" class="body">
                 <h1><a href="/">Tangential Labs </a></h1>
                 <nav><ul>
-                    <li><a href="/category/projects.html">projects</a></li>
+                    <li class="active"><a href="/category/projects.html">projects</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/practical-classes.html" rel="bookmark"
+           title="Permalink to "Practical Classes"">"Practical Classes"</a></h1>
+    </header>
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="/practical-classes.html">"Practical Classes"</a></h1>
+    <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2016-02-17T19:19:00+00:00">
                 Published: Wed 17 February 2016
@@ -32,7 +37,7 @@
         </address>
 <p>In <a href="/category/projects.html">projects</a>.</p>
 
-</footer><!-- /.post-info --><p>While there are many tutorials out there to impart the wisdom of classes through various incantations of "Cats are animals" there seems to be little in the way of more concrete "this is actually how I'd do it" examples.  This post attempts to fill that gap a bit.</p>
+</footer><!-- /.post-info -->      <p>While there are many tutorials out there to impart the wisdom of classes through various incantations of "Cats are animals" there seems to be little in the way of more concrete "this is actually how I'd do it" examples.  This post attempts to fill that gap a bit.</p>
 <p>Sometimes it seems that 50% of good code is just having good names for things.  There are various camps about how one should name variables and certainly every programming language has at least one strong opinion about captilization of class names.  In the end, though, it is the names that make sense to a human that are the most useful.  Let us start with a counter example.</p>
 <h2>Books, Books, and more books</h2>
 <div class="highlight"><pre><span></span><span class="n">namespace</span> <span class="n">ClassDemoApp</span>
@@ -161,8 +166,11 @@
 </pre></div>
 
 
-<p>We didn't do much here but we introduced a .NET class called <code>List</code>.  The reason I mention it is that it has <em>absolutely nothing</em> to do with Books.  The behaviors in these two classes are orthogonal and our class hierarchy can remain flat (and easily maintained).  At this point in my day-to-day coding I tend towards using interfaces rather than subclassing much of the time.  Subclassing is hugely powerful and easily abused.</p>                </article>
-            </aside><!-- /#featured -->
+<p>We didn't do much here but we introduced a .NET class called <code>List</code>.  The reason I mention it is that it has <em>absolutely nothing</em> to do with Books.  The behaviors in these two classes are orthogonal and our class hierarchy can remain flat (and easily maintained).  At this point in my day-to-day coding I tend towards using interfaces rather than subclassing much of the time.  Subclassing is hugely powerful and easily abused.</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
         <section id="extras" class="body">
                 <div class="social">
                         <h2>social</h2>
