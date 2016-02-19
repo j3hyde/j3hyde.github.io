@@ -171,6 +171,7 @@ Alright so let's get even more realistic using interfaces and a bit of subclassi
         public void AddComponent(IComponent comp)
         {
             components.Add(comp);
+            comp.SetParent(this);
         }
 
         public void DoAllTheStuff()
@@ -189,7 +190,10 @@ Alright so let's get even more realistic using interfaces and a bit of subclassi
         public void DoStuff()
         {
             float time = 0.1f;
-            parent.Position = new Vector2() { x = parent.Position.x + parent.Velocity.x * time, y = parent.Position.y + parent.Velocity.y * time };
+            var p = parent;
+            if (p == null) return;
+
+            p.Position = new Vector2() { x = p.Position.x + p.Velocity.x * time, y = p.Position.y + p.Velocity.y * time };
         }
 
         public void SetParent(IEntity entity)
