@@ -3,8 +3,7 @@
 <head>
         <meta charset="utf-8" />
         <title>Tangential Labs - j3hyde</title>
-        <link rel="stylesheet" href="http://j3hyde.github.io/theme/css/main.css" />
-        <link href="http://j3hyde.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Tangential Labs Atom Feed" />
+        <link rel="stylesheet" href="/theme/css/main.css" />
 
         <!--[if IE]>
             <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -13,24 +12,24 @@
 
 <body id="index" class="home">
         <header id="banner" class="body">
-                <h1><a href="http://j3hyde.github.io/">Tangential Labs </a></h1>
+                <h1><a href="/">Tangential Labs </a></h1>
                 <nav><ul>
-                    <li><a href="http://j3hyde.github.io/category/projects.html">projects</a></li>
+                    <li><a href="/category/projects.html">projects</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://j3hyde.github.io/practical-classes.html">"Practical Classes"</a></h1>
+                    <h1 class="entry-title"><a href="/practical-classes.html">"Practical Classes"</a></h1>
 <footer class="post-info">
         <abbr class="published" title="2016-02-17T19:19:00+00:00">
                 Published: Wed 17 February 2016
         </abbr>
 
         <address class="vcard author">
-                By                         <a class="url fn" href="http://j3hyde.github.io/author/j3hyde.html">j3hyde</a>
+                By                         <a class="url fn" href="/author/j3hyde.html">j3hyde</a>
         </address>
-<p>In <a href="http://j3hyde.github.io/category/projects.html">projects</a>.</p>
+<p>In <a href="/category/projects.html">projects</a>.</p>
 
 </footer><!-- /.post-info --><p>While there are many tutorials out there to impart the wisdom of classes through various incantations of "Cats are animals" there seems to be little in the way of more concrete "this is actually how I'd do it" examples.  This post attempts to fill that gap a bit.</p>
 <p>Sometimes it seems that 50% of good code is just having good names for things.  There are various camps about how one should name variables and certainly every programming language has at least one strong opinion about captilization of class names.  In the end, though, it is the names that make sense to a human that are the most useful.  Let us start with a counter example.</p>
@@ -161,13 +160,87 @@
 </pre></div>
 
 
-<p>We didn't do much here but we introduced a .NET class called <code>List</code>.  The reason I mention it is that it has <em>absolutely nothing</em> to do with Books.  The behaviors in these two classes are orthogonal and our class hierarchy can remain flat (and easily maintained).  At this point in my day-to-day coding I tend towards using interfaces rather than subclassing much of the time.  Subclassing is hugely powerful and easily abused.</p>                </article>
+<p>We didn't do much here but we introduced a .NET class called <code>List</code>.  The reason I mention it is that it has <em>absolutely nothing</em> to do with Books.  The behaviors in these two classes are orthogonal and our class hierarchy can remain flat (and easily maintained).  At this point in my day-to-day coding I tend towards using interfaces rather than subclassing much of the time.  Subclassing is hugely powerful and easily abused.</p>
+<p>Alright so let's get even more realistic using interfaces and a bit of subclassing.</p>
+<div class="highlight"><pre><span></span><span class="c1">// Sad vector has no vector math.</span>
+<span class="n">public</span> <span class="k">struct</span> <span class="n">Vector2</span>
+<span class="p">{</span>
+    <span class="n">public</span> <span class="kt">float</span> <span class="n">x</span><span class="p">;</span>
+    <span class="n">public</span> <span class="kt">float</span> <span class="n">y</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Components give Entities behavior</span>
+<span class="n">public</span> <span class="n">interface</span> <span class="n">IComponent</span>
+<span class="p">{</span>
+    <span class="kt">void</span> <span class="n">DoStuff</span><span class="p">();</span>
+    <span class="kt">void</span> <span class="nf">SetParent</span><span class="p">(</span><span class="n">IEntity</span> <span class="n">entity</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// All IEntities do things...</span>
+<span class="n">public</span> <span class="n">interface</span> <span class="n">IEntity</span>
+<span class="p">{</span>
+    <span class="n">Vector2</span> <span class="n">Position</span> <span class="p">{</span> <span class="n">get</span><span class="p">;</span> <span class="n">set</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">Vector2</span> <span class="n">Velocity</span> <span class="p">{</span> <span class="n">get</span><span class="p">;</span> <span class="n">set</span><span class="p">;</span> <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">AddComponent</span><span class="p">(</span><span class="n">IComponent</span> <span class="n">comp</span><span class="p">);</span>
+    <span class="kt">void</span> <span class="nf">DoAllTheStuff</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// but Entities do them a specific way</span>
+<span class="n">public</span> <span class="n">class</span> <span class="nl">Entity</span> <span class="p">:</span> <span class="n">IEntity</span>
+<span class="p">{</span>
+    <span class="n">IList</span><span class="o">&lt;</span><span class="n">IComponent</span><span class="o">&gt;</span> <span class="n">components</span><span class="p">;</span>
+
+    <span class="n">public</span> <span class="kt">void</span> <span class="nf">AddComponent</span><span class="p">(</span><span class="n">IComponent</span> <span class="n">comp</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">components</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">comp</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">public</span> <span class="kt">void</span> <span class="nf">DoAllTheStuff</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="n">foreach</span><span class="p">(</span><span class="n">var</span> <span class="n">c</span> <span class="n">in</span> <span class="n">components</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">c</span><span class="p">.</span><span class="n">DoStuff</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">public</span> <span class="n">class</span> <span class="nl">PhysicsComponent</span><span class="p">:</span><span class="n">IComponent</span>
+<span class="p">{</span>
+    <span class="n">IEntity</span> <span class="n">parent</span><span class="p">;</span>
+
+    <span class="n">public</span> <span class="kt">void</span> <span class="nf">DoStuff</span><span class="p">()</span>
+    <span class="p">{</span>
+        <span class="kt">float</span> <span class="n">time</span> <span class="o">=</span> <span class="mf">0.1f</span><span class="p">;</span>
+        <span class="n">parent</span><span class="p">.</span><span class="n">Position</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Vector2</span><span class="p">()</span> <span class="p">{</span> <span class="n">x</span> <span class="o">=</span> <span class="n">parent</span><span class="p">.</span><span class="n">Position</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">parent</span><span class="p">.</span><span class="n">Velocity</span><span class="p">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">time</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">parent</span><span class="p">.</span><span class="n">Position</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">parent</span><span class="p">.</span><span class="n">Velocity</span><span class="p">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">time</span> <span class="p">};</span>
+    <span class="p">}</span>
+
+    <span class="n">public</span> <span class="kt">void</span> <span class="nf">SetParent</span><span class="p">(</span><span class="n">IEntity</span> <span class="n">entity</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">parent</span> <span class="o">=</span> <span class="n">entity</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="n">class</span> <span class="n">Program</span>
+<span class="p">{</span>
+    <span class="k">static</span> <span class="kt">void</span> <span class="n">Main</span><span class="p">(</span><span class="n">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+    <span class="p">{</span>
+        <span class="n">IEntity</span> <span class="n">e</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Entity</span><span class="p">();</span>
+
+        <span class="n">e</span><span class="p">.</span><span class="n">AddComponent</span><span class="p">(</span><span class="n">new</span> <span class="n">PhysicsComponent</span><span class="p">());</span>
+
+        <span class="n">e</span><span class="p">.</span><span class="n">DoAllTheStuff</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+
+<p>This sample is still not fully complete but it is closer to a real-world example.  We use subclassing to provide some default behavior in the base class (Entity) but consumers (such as Program.Main) don't actually require us to provide an Entity subclass.  Instead we only have to provide something that <em>looks</em> like an entity.  And the IEntity interface defines how they look - what methods and properties are guaranteed to exist.</p>                </article>
             </aside><!-- /#featured -->
         <section id="extras" class="body">
                 <div class="social">
                         <h2>social</h2>
                         <ul>
-                            <li><a href="http://j3hyde.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate">atom feed</a></li>
 
                             <li><a href="http://twitter.com/j3hyde">twitter</a></li>
                             <li><a href="http://github.com/j3hyde">github</a></li>
