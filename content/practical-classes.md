@@ -135,3 +135,79 @@ This is a step in the right direction but I find there is a lot of power in not 
     }
 
 We didn't do much here but we introduced a .NET class called `List`.  The reason I mention it is that it has *absolutely nothing* to do with Books.  The behaviors in these two classes are orthogonal and our class hierarchy can remain flat (and easily maintained).  At this point in my day-to-day coding I tend towards using interfaces rather than subclassing much of the time.  Subclassing is hugely powerful and easily abused.
+
+Alright so let's get even more realistic using interfaces and a bit of subclassing.
+
+    :::C#
+    // Sad vector has no vector math.
+    public struct Vector2
+    {
+        public float x;
+        public float y;
+    }
+
+    // Components give Entities behavior
+    public interface IComponent
+    {
+        void DoStuff();
+        void SetParent(IEntity entity);
+    }
+
+    // All IEntities do things...
+    public interface IEntity
+    {
+        Vector2 Position { get; set; }
+        Vector2 Velocity { get; set; }
+
+        void AddComponent(IComponent comp);
+        void DoAllTheStuff();
+    }
+
+    // but Entities do them a specific way
+    public class Entity : IEntity
+    {
+        IList<IComponent> components;
+
+        public void AddComponent(IComponent comp)
+        {
+            components.Add(comp);
+        }
+
+        public void DoAllTheStuff()
+        {
+            foreach(var c in components)
+            {
+                c.DoStuff();
+            }
+        }
+    }
+
+    public class PhysicsComponent:IComponent
+    {
+        IEntity parent;
+
+        public void DoStuff()
+        {
+            float time = 0.1f;
+            parent.Position = new Vector2() { x = parent.Position.x + parent.Velocity.x * time, y = parent.Position.y + parent.Velocity.y * time };
+        }
+
+        public void SetParent(IEntity entity)
+        {
+            parent = entity;
+        }
+    }
+
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            IEntity e = new Entity();
+
+            e.AddComponent(new PhysicsComponent());
+
+            e.DoAllTheStuff();
+        }
+    }
+
+This sample is still not fully complete but it is closer to a real-world example.  We use subclassing to provide some default behavior in the base class (Entity) but consumers (such as Program.Main) don't actually require us to provide an Entity subclass.  Instead we only have to provide something that *looks* like an entity.  And the IEntity interface defines how they look - what methods and properties are guaranteed to exist.
