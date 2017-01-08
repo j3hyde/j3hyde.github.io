@@ -14,7 +14,7 @@
         <header id="banner" class="body">
                 <h1><a href="/">Tangential Labs </a></h1>
                 <nav><ul>
-                    <li class="active"><a href="/category/projects.html">projects</a></li>
+                    <li class="active"><a href="/category/articles.html">articles</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 <section id="content" class="body">
@@ -27,14 +27,14 @@
 
     <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2016-02-17T19:19:00+00:00">
-                Published: Wed 17 February 2016
+        <abbr class="published" title="2017-01-08T11:56:00+00:00">
+                Published: Sun 08 January 2017
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="/author/j3hyde.html">j3hyde</a>
         </address>
-<p>In <a href="/category/projects.html">projects</a>.</p>
+<p>In <a href="/category/articles.html">articles</a>.</p>
 
 </footer><!-- /.post-info -->      <p>While there are many tutorials out there to impart the wisdom of classes through various incantations of "Cats are animals" there seems to be little in the way of more concrete "this is actually how I'd do it" examples.  This post attempts to fill that gap a bit.</p>
 <p>Sometimes it seems that 50% of good code is just having good names for things.  There are various camps about how one should name variables and certainly every programming language has at least one strong opinion about captilization of class names.  In the end, though, it is the names that make sense to a human that are the most useful.  Let us start with a counter example.</p>
@@ -85,7 +85,7 @@
 </pre></div>
 
 
-<p>Okay but that is not terribly easy for a human to read and since it is the human who needs to get it right (and let's face it problems in software are problems in humans), it is beneficial to make it intelligible.</p>
+<p>But that is not terribly easy for a human to read and since it is the human who needs to get it right (and let's face it problems in software are problems in humans), it is beneficial to make it intelligible.</p>
 <p>So let's revisit the above code with a better example:</p>
 <div class="highlight"><pre><span></span><span class="n">namespace</span> <span class="n">ClassDemoApp</span>
 <span class="p">{</span>
@@ -126,7 +126,7 @@
 </pre></div>
 
 
-<p>This is a step in the right direction but I find there is a lot of power in not limiting my code to physical-world relationships.  OOP is, after all, a programming concept.  The above works and is fine but let's consider organizing those books:</p>
+<p>This is a step in the right direction but I find there is a lot of power in not limiting my code to physical-world relationships.  OOP is, after all, a programming concept not a physical one.  The above works and is fine but let's consider organizing those books:</p>
 <div class="highlight"><pre><span></span><span class="n">namespace</span> <span class="n">ClassDemoApp</span>
 <span class="p">{</span>
     <span class="n">class</span> <span class="n">Book</span>
@@ -165,86 +165,233 @@
 </pre></div>
 
 
-<p>We didn't do much here but we introduced a .NET class called <code>List</code>.  The reason I mention it is that it has <em>absolutely nothing</em> to do with Books.  The behaviors in these two classes are orthogonal and our class hierarchy can remain flat (and easily maintained).  At this point in my day-to-day coding I tend towards using interfaces rather than subclassing much of the time.  Subclassing is hugely powerful and easily abused.</p>
-<p>Alright so let's get even more realistic using interfaces and a bit of subclassing.</p>
-<div class="highlight"><pre><span></span><span class="c1">// Sad vector has no vector math.</span>
-<span class="n">public</span> <span class="k">struct</span> <span class="n">Vector2</span>
+<p>We didn't do much here but we introduced a .NET generic class called <code>List</code>.  The reason I mention it is that it has <em>absolutely nothing</em> to do with Books.  The behaviors in these two classes are orthogonal and our class hierarchy can remain flat (and easily maintained).  At this point in my day-to-day coding I tend towards using interfaces rather than subclassing much of the time.  Subclassing is hugely powerful and easily abused.</p>
+<h2>Better Game Entities for Home and Abroad</h2>
+<p>Alright so let's get even more realistic using interfaces and a bit of subclassing.  First an extreme "anti-example":</p>
+<div class="highlight"><pre><span></span><span class="n">namespace</span> <span class="n">ClassDemoApp</span>
 <span class="p">{</span>
-    <span class="n">public</span> <span class="kt">float</span> <span class="n">x</span><span class="p">;</span>
-    <span class="n">public</span> <span class="kt">float</span> <span class="n">y</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="c1">// Components give Entities behavior</span>
-<span class="n">public</span> <span class="n">interface</span> <span class="n">IComponent</span>
-<span class="p">{</span>
-    <span class="kt">void</span> <span class="n">DoStuff</span><span class="p">();</span>
-    <span class="kt">void</span> <span class="nf">SetParent</span><span class="p">(</span><span class="n">IEntity</span> <span class="n">entity</span><span class="p">);</span>
-<span class="p">}</span>
-
-<span class="c1">// All IEntities do things...</span>
-<span class="n">public</span> <span class="n">interface</span> <span class="n">IEntity</span>
-<span class="p">{</span>
-    <span class="n">Vector2</span> <span class="n">Position</span> <span class="p">{</span> <span class="n">get</span><span class="p">;</span> <span class="n">set</span><span class="p">;</span> <span class="p">}</span>
-    <span class="n">Vector2</span> <span class="n">Velocity</span> <span class="p">{</span> <span class="n">get</span><span class="p">;</span> <span class="n">set</span><span class="p">;</span> <span class="p">}</span>
-
-    <span class="kt">void</span> <span class="n">AddComponent</span><span class="p">(</span><span class="n">IComponent</span> <span class="n">comp</span><span class="p">);</span>
-    <span class="kt">void</span> <span class="nf">DoAllTheStuff</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="c1">// but Entities do them a specific way</span>
-<span class="n">public</span> <span class="n">class</span> <span class="nl">Entity</span> <span class="p">:</span> <span class="n">IEntity</span>
-<span class="p">{</span>
-    <span class="n">IList</span><span class="o">&lt;</span><span class="n">IComponent</span><span class="o">&gt;</span> <span class="n">components</span><span class="p">;</span>
-
-    <span class="n">public</span> <span class="kt">void</span> <span class="nf">AddComponent</span><span class="p">(</span><span class="n">IComponent</span> <span class="n">comp</span><span class="p">)</span>
+    <span class="c1">// Sad vector has no vector math.</span>
+    <span class="n">public</span> <span class="k">struct</span> <span class="n">Vector2</span>
     <span class="p">{</span>
-        <span class="n">components</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">comp</span><span class="p">);</span>
-        <span class="n">comp</span><span class="p">.</span><span class="n">SetParent</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+        <span class="n">public</span> <span class="kt">float</span> <span class="n">x</span><span class="p">;</span>
+        <span class="n">public</span> <span class="kt">float</span> <span class="n">y</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="n">public</span> <span class="kt">void</span> <span class="nf">DoAllTheStuff</span><span class="p">()</span>
+    <span class="c1">// Entities do stuff</span>
+    <span class="n">public</span> <span class="n">class</span> <span class="n">Entity</span>
     <span class="p">{</span>
-        <span class="n">foreach</span><span class="p">(</span><span class="n">var</span> <span class="n">c</span> <span class="n">in</span> <span class="n">components</span><span class="p">)</span>
+        <span class="n">Vector2</span> <span class="n">Position</span> <span class="p">{</span> <span class="n">get</span><span class="p">;</span> <span class="n">set</span><span class="p">;</span> <span class="p">}</span>
+        <span class="n">Vector2</span> <span class="n">Velocity</span> <span class="p">{</span> <span class="n">get</span><span class="p">;</span> <span class="n">set</span><span class="p">;</span> <span class="p">}</span>
+
+        <span class="n">public</span> <span class="n">virtual</span> <span class="kt">void</span> <span class="n">DoAllTheStuff</span><span class="p">()</span>
         <span class="p">{</span>
-            <span class="n">c</span><span class="p">.</span><span class="n">DoStuff</span><span class="p">();</span>
+            <span class="c1">// Stuff gets done in here</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Lets have characters in our game</span>
+    <span class="n">public</span> <span class="n">class</span> <span class="nl">Character</span> <span class="p">:</span> <span class="n">Entity</span>
+    <span class="p">{</span>
+        <span class="n">public</span> <span class="n">virtual</span> <span class="kt">void</span> <span class="n">DoAllTheStuff</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="c1">// Perhaps characters say things in the game</span>
+            <span class="n">this</span><span class="p">.</span><span class="n">SayStuff</span><span class="p">()</span>
+        <span class="p">}</span>
+
+        <span class="n">public</span> <span class="n">virtual</span> <span class="kt">void</span> <span class="n">SayStuff</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="c1">// Speak poetry to me...</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Ah but we need AI characters</span>
+    <span class="n">public</span> <span class="n">class</span> <span class="nl">NPC</span> <span class="p">:</span> <span class="n">Character</span>
+    <span class="p">{</span>
+        <span class="n">public</span> <span class="n">virtual</span> <span class="kt">void</span> <span class="n">DoAllTheStuff</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="c1">// Perhaps characters say things in the game</span>
+            <span class="n">this</span><span class="p">.</span><span class="n">SayStuff</span><span class="p">()</span>
+
+            <span class="c1">// Also do AI movement things</span>
+        <span class="p">}</span>
+
+        <span class="n">public</span> <span class="n">virtual</span> <span class="kt">void</span> <span class="n">SayStuff</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="c1">// Speak poetry to me...</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// But this one is a player character</span>
+    <span class="n">public</span> <span class="n">class</span> <span class="nl">Player</span> <span class="p">:</span> <span class="n">Character</span>
+    <span class="p">{</span>
+        <span class="n">public</span> <span class="n">virtual</span> <span class="kt">void</span> <span class="n">DoAllTheStuff</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="c1">// Perhaps characters say things in the game</span>
+            <span class="n">this</span><span class="p">.</span><span class="n">SayStuff</span><span class="p">()</span>
+
+            <span class="c1">// Interpret player input here</span>
+        <span class="p">}</span>
+
+        <span class="n">public</span> <span class="n">virtual</span> <span class="kt">void</span> <span class="n">SayStuff</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="c1">// Say things worthy of a Player</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// Ah we want pickup items as well!</span>
+    <span class="n">public</span> <span class="n">abstract</span> <span class="n">class</span> <span class="nl">Item</span> <span class="p">:</span> <span class="n">Entity</span>
+    <span class="p">{</span>
+        <span class="n">public</span> <span class="n">virtual</span> <span class="kt">void</span> <span class="n">DoAllTheStuff</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="c1">// Detect interactions with the player</span>
+            <span class="n">self</span><span class="p">.</span><span class="n">DoPickup</span><span class="p">();</span>
+        <span class="p">}</span>
+
+        <span class="n">public</span> <span class="n">virtual</span> <span class="kt">void</span> <span class="n">DoPickup</span><span class="p">();</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...like health items</span>
+    <span class="n">public</span> <span class="n">class</span> <span class="nl">Health</span> <span class="p">:</span> <span class="n">Item</span>
+    <span class="p">{</span>
+        <span class="n">public</span> <span class="n">virtual</span> <span class="kt">void</span> <span class="n">DoPickup</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="c1">// add health to the player</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...and super health items</span>
+    <span class="n">public</span> <span class="n">class</span> <span class="nl">SuperHealth</span> <span class="p">:</span> <span class="n">Health</span>
+    <span class="p">{</span>
+        <span class="n">public</span> <span class="n">virtual</span> <span class="kt">void</span> <span class="n">DoPickup</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="c1">// increase max health</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="c1">// ...and invincibility</span>
+    <span class="n">public</span> <span class="n">class</span> <span class="nl">Invincibility</span> <span class="p">:</span> <span class="n">SuperHealth</span>
+    <span class="p">{</span>
+        <span class="n">public</span> <span class="n">virtual</span> <span class="kt">void</span> <span class="n">DoPickup</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="c1">// really go over the top here</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">class</span> <span class="n">Program</span>
+    <span class="p">{</span>
+        <span class="k">static</span> <span class="kt">void</span> <span class="n">Main</span><span class="p">(</span><span class="n">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">Entity</span> <span class="n">e</span> <span class="o">=</span> <span class="n">Player</span><span class="p">();</span>
+            <span class="n">SuperHealth</span> <span class="n">h</span> <span class="o">=</span> <span class="n">new</span> <span class="n">SuperHealth</span><span class="p">();</span>
         <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
+</pre></div>
 
-<span class="n">public</span> <span class="n">class</span> <span class="nl">PhysicsComponent</span><span class="p">:</span><span class="n">IComponent</span>
+
+<p>Okay so that's a pathological case and is getting a bit silly really but I hope you can see how deep this tree is getting.  The problem is that as you add more kinds of items or characters that tree starts branching thereby compounding the problem.  What is the problem?  Maintainability, readability, flexibility.  It becomes extremely hard to reuse any of your code because you've made so many specific subclasses that when you go to subclass again, it's because you need just one method from the parent class but none of the other 20 methods that conflict with the new class you are trying to create.  Thus you make yet another subclass.  I'm sure better developers than I would name off a 200 item list of all the things wrong with this.</p>
+<p>Let's abstract this and make the structure more flat.</p>
+<div class="highlight"><pre><span></span><span class="n">namespace</span> <span class="n">ClassDemoApp</span>
 <span class="p">{</span>
-    <span class="n">IEntity</span> <span class="n">parent</span><span class="p">;</span>
-
-    <span class="n">public</span> <span class="kt">void</span> <span class="nf">DoStuff</span><span class="p">()</span>
+    <span class="c1">// Sad vector still has no vector math.</span>
+    <span class="n">public</span> <span class="k">struct</span> <span class="n">Vector2</span>
     <span class="p">{</span>
-        <span class="kt">float</span> <span class="n">time</span> <span class="o">=</span> <span class="mf">0.1f</span><span class="p">;</span>
-        <span class="n">var</span> <span class="n">p</span> <span class="o">=</span> <span class="n">parent</span><span class="p">;</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">null</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
-
-        <span class="n">p</span><span class="p">.</span><span class="n">Position</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Vector2</span><span class="p">()</span> <span class="p">{</span> <span class="n">x</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">Position</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">p</span><span class="p">.</span><span class="n">Velocity</span><span class="p">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">time</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">Position</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">p</span><span class="p">.</span><span class="n">Velocity</span><span class="p">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">time</span> <span class="p">};</span>
+        <span class="n">public</span> <span class="kt">float</span> <span class="n">x</span><span class="p">;</span>
+        <span class="n">public</span> <span class="kt">float</span> <span class="n">y</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="n">public</span> <span class="kt">void</span> <span class="nf">SetParent</span><span class="p">(</span><span class="n">IEntity</span> <span class="n">entity</span><span class="p">)</span>
+    <span class="c1">// Components give Entities behavior</span>
+    <span class="n">public</span> <span class="n">interface</span> <span class="n">IComponent</span>
     <span class="p">{</span>
-        <span class="n">parent</span> <span class="o">=</span> <span class="n">entity</span><span class="p">;</span>
+        <span class="kt">void</span> <span class="n">DoStuff</span><span class="p">();</span>
+        <span class="kt">void</span> <span class="nf">SetParent</span><span class="p">(</span><span class="n">IEntity</span> <span class="n">entity</span><span class="p">);</span>
     <span class="p">}</span>
-<span class="p">}</span>
 
-<span class="n">class</span> <span class="n">Program</span>
-<span class="p">{</span>
-    <span class="k">static</span> <span class="kt">void</span> <span class="n">Main</span><span class="p">(</span><span class="n">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+    <span class="c1">// All IEntities do things...</span>
+    <span class="n">public</span> <span class="n">interface</span> <span class="n">IEntity</span>
     <span class="p">{</span>
-        <span class="n">IEntity</span> <span class="n">e</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Entity</span><span class="p">();</span>
+        <span class="n">Vector2</span> <span class="n">Position</span> <span class="p">{</span> <span class="n">get</span><span class="p">;</span> <span class="n">set</span><span class="p">;</span> <span class="p">}</span>
+        <span class="n">Vector2</span> <span class="n">Velocity</span> <span class="p">{</span> <span class="n">get</span><span class="p">;</span> <span class="n">set</span><span class="p">;</span> <span class="p">}</span>
 
-        <span class="n">e</span><span class="p">.</span><span class="n">AddComponent</span><span class="p">(</span><span class="n">new</span> <span class="n">PhysicsComponent</span><span class="p">());</span>
+        <span class="kt">void</span> <span class="n">AddComponent</span><span class="p">(</span><span class="n">IComponent</span> <span class="n">comp</span><span class="p">);</span>
+        <span class="kt">void</span> <span class="nf">DoAllTheStuff</span><span class="p">();</span>
+    <span class="p">}</span>
 
-        <span class="n">e</span><span class="p">.</span><span class="n">DoAllTheStuff</span><span class="p">();</span>
+    <span class="c1">// but Entities do them a specific way</span>
+    <span class="n">public</span> <span class="n">class</span> <span class="nl">Entity</span> <span class="p">:</span> <span class="n">IEntity</span>
+    <span class="p">{</span>
+        <span class="n">IList</span><span class="o">&lt;</span><span class="n">IComponent</span><span class="o">&gt;</span> <span class="n">components</span><span class="p">;</span>
+
+        <span class="n">public</span> <span class="kt">void</span> <span class="nf">AddComponent</span><span class="p">(</span><span class="n">IComponent</span> <span class="n">comp</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">components</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">comp</span><span class="p">);</span>
+            <span class="n">comp</span><span class="p">.</span><span class="n">SetParent</span><span class="p">(</span><span class="n">this</span><span class="p">);</span>
+        <span class="p">}</span>
+
+        <span class="n">public</span> <span class="kt">void</span> <span class="nf">DoAllTheStuff</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="n">foreach</span><span class="p">(</span><span class="n">var</span> <span class="n">c</span> <span class="n">in</span> <span class="n">components</span><span class="p">)</span>
+            <span class="p">{</span>
+                <span class="n">c</span><span class="p">.</span><span class="n">DoStuff</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">public</span> <span class="n">class</span> <span class="nl">PhysicsComponent</span><span class="p">:</span><span class="n">IComponent</span>
+    <span class="p">{</span>
+        <span class="n">IEntity</span> <span class="n">parent</span><span class="p">;</span>
+
+        <span class="n">public</span> <span class="kt">void</span> <span class="nf">DoStuff</span><span class="p">()</span>
+        <span class="p">{</span>
+            <span class="kt">float</span> <span class="n">time</span> <span class="o">=</span> <span class="mf">0.1f</span><span class="p">;</span>
+            <span class="n">var</span> <span class="n">p</span> <span class="o">=</span> <span class="n">parent</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">null</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+            <span class="n">p</span><span class="p">.</span><span class="n">Position</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Vector2</span><span class="p">()</span> <span class="p">{</span> <span class="n">x</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">Position</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">p</span><span class="p">.</span><span class="n">Velocity</span><span class="p">.</span><span class="n">x</span> <span class="o">*</span> <span class="n">time</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">Position</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">p</span><span class="p">.</span><span class="n">Velocity</span><span class="p">.</span><span class="n">y</span> <span class="o">*</span> <span class="n">time</span> <span class="p">};</span>
+        <span class="p">}</span>
+
+        <span class="n">public</span> <span class="kt">void</span> <span class="nf">SetParent</span><span class="p">(</span><span class="n">IEntity</span> <span class="n">entity</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">parent</span> <span class="o">=</span> <span class="n">entity</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">public</span> <span class="n">interface</span> <span class="nl">IPickupComponent</span> <span class="p">:</span> <span class="n">IComponent</span>
+    <span class="p">{</span>
+        <span class="n">public</span> <span class="kt">void</span> <span class="n">DoPickup</span><span class="p">(</span><span class="n">IEntity</span> <span class="n">player</span><span class="p">);</span>
+    <span class="p">}</span>
+
+    <span class="n">public</span> <span class="n">class</span> <span class="nl">HealthPickupComponent</span><span class="p">:</span> <span class="n">IPickupComponent</span>
+    <span class="p">{</span>
+        <span class="kt">int</span> <span class="n">health</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+
+        <span class="n">public</span> <span class="kt">void</span> <span class="nf">DoPickup</span><span class="p">(</span><span class="n">IEntity</span> <span class="n">player</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="c1">// Apply the health</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="n">class</span> <span class="n">Program</span>
+    <span class="p">{</span>
+        <span class="k">static</span> <span class="kt">void</span> <span class="n">Main</span><span class="p">(</span><span class="n">string</span><span class="p">[]</span> <span class="n">args</span><span class="p">)</span>
+        <span class="p">{</span>
+            <span class="n">IEntity</span> <span class="n">player</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Entity</span><span class="p">();</span>
+            <span class="n">player</span><span class="p">.</span><span class="n">AddComponent</span><span class="p">(</span><span class="n">new</span> <span class="n">PhysicsComponent</span><span class="p">());</span>
+            <span class="n">player</span><span class="p">.</span><span class="n">DoAllTheStuff</span><span class="p">();</span>
+
+            <span class="n">IEntity</span> <span class="n">healthPickup</span> <span class="o">=</span> <span class="n">new</span> <span class="n">Entity</span><span class="p">();</span>
+            <span class="n">healthPickup</span><span class="p">.</span><span class="n">AddComponent</span><span class="p">(</span><span class="n">new</span> <span class="n">HealthPickupComponent</span><span class="p">());</span>
+            <span class="n">healthPickup</span><span class="p">.</span><span class="n">DoPickup</span><span class="p">(</span><span class="n">player</span><span class="p">);</span>
+        <span class="p">}</span>
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 
 
 <p>This sample is still not fully complete but it is closer to a real-world example.  We use subclassing to provide some default behavior in the base class (Entity) but consumers (such as Program.Main) don't actually require us to provide an Entity subclass.  Instead we only have to provide something that <em>looks</em> like an entity.  And the IEntity interface defines how they look - what methods and properties are guaranteed to exist.</p>
+<p>What you might start to see in this example is a different kind of complexity emerging.  Now I have to manage a bag of components that aren't guaranteed to exist at any given time and it's those components that have the properties and methods i need to interact with.  In my projects I end up with methods on the Entity class to help with finding contained components with certain interfaces.  For example, I want a physics service to be able to find the PhysicsComponent on each of two entities easily and quickly.  Another useful part of the Entity functionality is to define a way to clone Entities.  This allows me to define a prototypical "Monster" or "HealthPickup" Entity which has all the right components.  I can then clone that into a new Entity and spawn it in the game world.</p>
+<p>What this comes down to is a sort of weighing the minimum cost involved.  The first might be easier to implement at first but the second method is more scalable.  In this example, you are moving from thinking of subclasses as different types of <em>things</em> to thinking of them as different kinds of <em>behaviors</em>.  The concept of 'type' then becomes data on an object rather than a systemic property of the class itself.</p>
+<p>Right.  So is that going to help anybody out there?  I don't know but I'd like to hear your thoughts.  Tweet me at @j3hyde.</p>
     </div><!-- /.entry-content -->
 
   </article>
