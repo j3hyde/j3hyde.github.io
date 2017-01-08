@@ -1,7 +1,6 @@
 Title: "Why and how I made a WinRT Component"
 Category: articles
-Date: 2016-10-18 16:43:00
-Status: draft
+Date: 2017-01-08 11:58:00
 
 Now that Windows 10 is a thing and FMOD directly supports a module for it, this topic isn't likely to be important for many people but it was a "must have" for my game for Windows Phone 8.1.
 
