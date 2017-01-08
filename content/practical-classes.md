@@ -1,6 +1,6 @@
 Title: "Practical Classes"
 Category: articles
-Date: 2016-02-17 19:19:00
+Date: 2017-01-08 11:56:00
 
 While there are many tutorials out there to impart the wisdom of classes through various incantations of "Cats are animals" there seems to be little in the way of more concrete "this is actually how I'd do it" examples.  This post attempts to fill that gap a bit.
 
