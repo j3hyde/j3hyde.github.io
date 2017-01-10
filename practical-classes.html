@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>"Practical Classes"</title>
+        <title>Practical Classes</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
 
         <!--[if IE]>
@@ -15,6 +15,7 @@
                 <h1><a href="/">Tangential Labs </a></h1>
                 <nav><ul>
                     <li class="active"><a href="/category/articles.html">articles</a></li>
+                    <li><a href="/category/projects.html">projects</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 <section id="content" class="body">
@@ -22,7 +23,7 @@
     <header>
       <h1 class="entry-title">
         <a href="/practical-classes.html" rel="bookmark"
-           title="Permalink to "Practical Classes"">"Practical Classes"</a></h1>
+           title="Permalink to Practical Classes">Practical Classes</a></h1>
     </header>
 
     <div class="entry-content">
@@ -38,7 +39,7 @@
 
 </footer><!-- /.post-info -->      <p>While there are many tutorials out there to impart the wisdom of classes through various incantations of "Cats are animals" there seems to be little in the way of more concrete "this is actually how I'd do it" examples.  This post attempts to fill that gap a bit.</p>
 <p>Sometimes it seems that 50% of good code is just having good names for things.  There are various camps about how one should name variables and certainly every programming language has at least one strong opinion about captilization of class names.  In the end, though, it is the names that make sense to a human that are the most useful.  Let us start with a counter example.</p>
-<h2>Books, Books, and more books</h2>
+<h1>Books, Books, and more books</h1>
 <div class="highlight"><pre><span></span><span class="n">namespace</span> <span class="n">ClassDemoApp</span>
 <span class="p">{</span>
     <span class="n">class</span> <span class="n">Book</span>
@@ -166,7 +167,7 @@
 
 
 <p>We didn't do much here but we introduced a .NET generic class called <code>List</code>.  The reason I mention it is that it has <em>absolutely nothing</em> to do with Books.  The behaviors in these two classes are orthogonal and our class hierarchy can remain flat (and easily maintained).  At this point in my day-to-day coding I tend towards using interfaces rather than subclassing much of the time.  Subclassing is hugely powerful and easily abused.</p>
-<h2>Better Game Entities for Home and Abroad</h2>
+<h1>Better Game Entities for Home and Abroad</h1>
 <p>Alright so let's get even more realistic using interfaces and a bit of subclassing.  First an extreme "anti-example":</p>
 <div class="highlight"><pre><span></span><span class="n">namespace</span> <span class="n">ClassDemoApp</span>
 <span class="p">{</span>
@@ -391,7 +392,8 @@
 <p>This sample is still not fully complete but it is closer to a real-world example.  We use subclassing to provide some default behavior in the base class (Entity) but consumers (such as Program.Main) don't actually require us to provide an Entity subclass.  Instead we only have to provide something that <em>looks</em> like an entity.  And the IEntity interface defines how they look - what methods and properties are guaranteed to exist.</p>
 <p>What you might start to see in this example is a different kind of complexity emerging.  Now I have to manage a bag of components that aren't guaranteed to exist at any given time and it's those components that have the properties and methods i need to interact with.  In my projects I end up with methods on the Entity class to help with finding contained components with certain interfaces.  For example, I want a physics service to be able to find the PhysicsComponent on each of two entities easily and quickly.  Another useful part of the Entity functionality is to define a way to clone Entities.  This allows me to define a prototypical "Monster" or "HealthPickup" Entity which has all the right components.  I can then clone that into a new Entity and spawn it in the game world.</p>
 <p>What this comes down to is a sort of weighing the minimum cost involved.  The first might be easier to implement at first but the second method is more scalable.  In this example, you are moving from thinking of subclasses as different types of <em>things</em> to thinking of them as different kinds of <em>behaviors</em>.  The concept of 'type' then becomes data on an object rather than a systemic property of the class itself.</p>
-<p>Right.  So is that going to help anybody out there?  I don't know but I'd like to hear your thoughts.  Tweet me at @j3hyde.</p>
+<h1>Conclusion</h1>
+<p>Right.  Is there a conclusion really?  Is that going to help anybody out there?  I don't know but I'd like to hear your thoughts.  Tweet me at @j3hyde.</p>
     </div><!-- /.entry-content -->
 
   </article>

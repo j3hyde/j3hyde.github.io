@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>"Why and how I made a WinRT Component"</title>
+        <title>Why and how I made a WinRT Component</title>
         <link rel="stylesheet" href="/theme/css/main.css" />
 
         <!--[if IE]>
@@ -15,6 +15,7 @@
                 <h1><a href="/">Tangential Labs </a></h1>
                 <nav><ul>
                     <li class="active"><a href="/category/articles.html">articles</a></li>
+                    <li><a href="/category/projects.html">projects</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 <section id="content" class="body">
@@ -22,7 +23,7 @@
     <header>
       <h1 class="entry-title">
         <a href="/why-and-how-i-made-a-winrt-component.html" rel="bookmark"
-           title="Permalink to "Why and how I made a WinRT Component"">"Why and how I made a WinRT Component"</a></h1>
+           title="Permalink to Why and how I made a WinRT Component">Why and how I made a WinRT Component</a></h1>
     </header>
 
     <div class="entry-content">
@@ -37,12 +38,12 @@
 <p>In <a href="/category/articles.html">articles</a>.</p>
 
 </footer><!-- /.post-info -->      <p>Now that Windows 10 is a thing and FMOD directly supports a module for it, this topic isn't likely to be important for many people but it was a "must have" for my game for Windows Phone 8.1.</p>
-<h2>Impetus and Background (The Why)</h2>
+<h1>Impetus and Background (The Why)</h1>
 <p>I started a "simple" game project based on a puzzle concept that I built in JavaScript.  I had some extra motivation from the <a href="http://ludumdare.com/compo/2014/09/29/october-challenge-2014/">2014</a> and <a href="http://ludumdare.com/compo/2015/09/28/october-challenge-2015/">2015 October Challenge</a> along the way.  (No, I haven't finished yet but that's beside the point!)  To access a market (thereby also increasing complexity) I decided to "go mboile."  I wasn't planning to finish in that single month but again, the motivation was useful.  I chose Microsoft Labs' Win2D as teh graphics tech (Thank you, Shawn Hargreaves and team) and went with C# for implementing an engine.  With the core built I brought someone on board for audio and had a new requirement:  <a href="http://fmod.org" title="FMOD Site">FMOD</a> support.</p>
 <p>Now you might say "what's the big deal?  FMOD supports Windows Phone 8.1 and has C# bindings" and you'd be right excep that they don't have <em>C# bindings on Windows Phone 8.1</em>.  Thus I entered the world of Windows Run-Time Components and C++/CX.</p>
 <p>The first line of research was to look into what my options were. It wasn't long before I put together just why FMOD lacked the module I needed.  THe easiest way to create C# bindings for a C/C++ library (DLL) is to use <a href="https://msdn.microsoft.com/en-us/library/aa288468(v=vs.71).aspx">PInvoke</a>.  If you look at most implementations of C# bindings that's what you'll find:  A thin wraper around a sugar-filled lollipop with a PInvoke center.</p>
 <p>The next stop was to figure out how to avoid that "Binding Cavity" and introduce some API nutrition.  For better or worse Microsfot has Run-Time Components for just this purpose.  Once an RT component is built, it can be used from any language supported by the runtime.  So you coul djust as easily use that component in a JavaScript app as in a C++/CX or C# app (all on a Windows platform, of course).</p>
-<h2>The Good Stuff (The How)</h2>
+<h1>The Good Stuff (The How)</h1>
 <p>So, to the meat of it!  We have FMOD DLLs built for the target platforms - namely Windows Phone 8.1 ARM/x896 and Windows ARM/x86 (i.e. <em>normal Windows Desktop</em>) - and we have .libs and headers to use those DLLs in our C++/CX projects.  Let's take a look:</p>
 <div class="highlight"><pre><span></span><span class="cm">/*$ preserve start $*/</span>
 
@@ -171,7 +172,7 @@
 
 <p>Fully learning that and then really "getting it" was a process but basically I tied the FMOD object life-times to RT objects in order to prevent leaks and otherwise made all pointer usage internal to the component.</p>
 <p>In the end I had a run-time component for FMOD that I could use to replace the simple/hacked playback component in my audio system.  Fortunately I'd already designed that as a pluggable system so it was quite easy to drop in an FMOD audio provider.  I can now instantiate FMOD effects, set their parameters and positions, and play them within my mobile game that is otherwise written in C#.</p>
-<h2>Addendum: Python</h2>
+<h1>Addendum: Python</h1>
 <p>For a later, quick, small, side-project over New Year, I wanted to use FMOD from Python.  Using ctypes on Windows this was much easier than I had anticipated.  See <a href="http://www.fmod.org/questions/question/how-to-use-fmod-from-a-python-script/">This post</a> for more information.</p>
 <p>From a practicality standpoint I did end up wrapping the API in some Python classes.</p>
 <script src="https://bitbucket.org/j3hyde/midiplayground/src/738d8db7ad4d2a835fffb9f5ac908c73e3bb6920/fmod.py?embed=t"></script>

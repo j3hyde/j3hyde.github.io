@@ -15,12 +15,93 @@
                 <h1><a href="/">Tangential Labs </a></h1>
                 <nav><ul>
                     <li><a href="/category/articles.html">articles</a></li>
+                    <li><a href="/category/projects.html">projects</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="/why-and-how-i-made-a-winrt-component.html">"Why and how I made a WinRT Component"</a></h1>
+                    <h1 class="entry-title"><a href="/temporal-soul-the-one-month-experiment-turned-two-plus-year-odyssey.html">Temporal Soul:  The One Month Experiment Turned Two Plus Year Odyssey</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2017-01-10T07:52:38+00:00">
+                Published: Tue 10 January 2017
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/j3hyde.html">j3hyde</a>
+        </address>
+<p>In <a href="/category/projects.html">projects</a>.</p>
+
+</footer><!-- /.post-info --><p>Just as I started to write this I went to the commit log for the project.  The first commit was 24 November 2014.  Over two years have gone by and my "see what can be done in a month" project has become somewhat of a monster.  I went from drawing out concepts on paper to building a few JavaScript prototypes to building a game engine using <a href="http://github.com/microsoft/win2d">Win2D</a> and <a href="http://fmod.org">FMOD</a>.  I'm still not finished but at least I'm focusing more on content and wiz-bang effects.  Although really, I should just release it.</p>
+<h1>Resisting Release</h1>
+<p>I am the kind of person who tends to want things to be "just right."  Some might say that it is perfectionism and they would probably be correct.  The problem with a project like this is that I can spend maybe five hours per week on the project — ten at most.  Yet I have this need/desire/requirement for the game to look good; to play well; to be interesting and engaging.  The problem is that despite designing the game to be simple, it was probably still too big for where I am in my game-making journey.</p>
+<p>So here I stand with a mobile game that is functionally in-tact, built for an effectively dead platform, and lacking content.  But that's okay because it's "almost finished."  Just one more tweak....</p>
+<h1>The Game</h1>
+<p>Okay, so what is it?  I wanted to build something with a temporal mechanic.  I liked the idea of designing something around cycles.  In audio you can hear beat frequencies as two tones get near enough in frequency.  I wanted the game to center around that.  One interpretation is to design a game using audio in that way — and I may still.  However, in this case I wanted the mechanic to be more physical.</p>
+<p>In the end I opted to use gamepieces that indicate their state:  A simple n-sided polygon where the gamepiece's wavelength is n.  Since the game's focus is on frequency and phase I used a simple matching mechanic (insert "match three eye roll" here).  Two adjacent gamepieces of differing frequency will eventually have a value of zero at the same time.  When this happens the pieces are removed, scored, and replaced with two new ones.</p>
+<p>A couple challenges in the game are that pieces with wavelengths that are harmonic (e.g. one is wavelength 3 and another is 6) will only match if their phases are aligned.  For example:</p>
+<table>
+<tr><th>Player Turn</th><th>3-Sided Gamepiece</th><th>6-Sided Gamepiece</th></tr>
+<tr><td>1</td><td>1</td><td>4</td></tr>
+<tr><td>2</td><td>2</td><td>5</td></tr>
+<tr><td>3</td><td>3</td><td>6</td></tr>
+<tr><td>4</td><td>1</td><td>1</td></tr>
+</table>
+
+<p>As the player progresses, eventually the two pieces will reset to 1 and be matched.  However, if they are out of phase:</p>
+<table>
+<tr><th>Player Turn</th><th>3-Sided Gamepiece</th><th>6-Sided Gamepiece</th></tr>
+<tr><td>1</td><td>1</td><td>5</td></tr>
+<tr><td>2</td><td>2</td><td>6</td></tr>
+<tr><td>3</td><td>3</td><td>1</td></tr>
+<tr><td>4</td><td>1</td><td>2</td></tr>
+<tr><td>5</td><td>2</td><td>3</td></tr>
+<tr><td>6</td><td>3</td><td>4</td></tr>
+</table>
+
+<p>In that case they'll never match.</p>
+<h1>But is it Fun?</h1>
+<p>That is my ultimate worry.  I have become a game designer by necessity.  I am not good at it but I will learn eventually.  Really I just want to ship it.  Fortunately, I think the mechanic is interesting and engaging.  For the pace of this type of game I think that is enough.  The fun comes from conquering something that is difficult to grasp or master.</p>
+<p>In each level of the game the spawn rate for each "order" of tile (the wavelength mentioned above) is changed and the number of tiles you must remove is changed.  In some cases you might only get a 3-order tile once every six turns and yet you need those tiles to finish the level.  This adds some tension — and I dare say some aspect of fun — to the game.</p>
+<h1>Current State / Future Additions</h1>
+<p>Currently I am doing more to add texture to the display of the game.  Although I want a simple asthetic, currently it is perhaps too simple.  I have also worked with someone on sound design for this game and I think the sound design is adding a nice atmosphere.  This produces a far richer experience than just the simple visuals aalone.  Lastly, I have been writing some dialog to go with the game.</p>
+<p>Ultimately there is a story to be told and I hope that that even a short playthrough will be emotionally satisfying for the player.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/midi-rpg.html" rel="bookmark"
+                           title="Permalink to MIDI RPG">MIDI RPG</a></h1>
+                </header>
+
+                <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2017-01-10T07:44:26+00:00">
+                Published: Tue 10 January 2017
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/j3hyde.html">j3hyde</a>
+        </address>
+<p>In <a href="/category/projects.html">projects</a>.</p>
+
+</footer><!-- /.post-info -->                <p>Over new year I took some time to revisit my <a href="http://bitbucket.org/j3hyde/midiplayground">MIDI Playground</a> where I put together toys and games using MIDI devices.  In this round I started to build a sort of dungeon RPG that is played on a <a href="https://global.novationmusic.com/launch/launchpad-mini">Launchpad Mini</a>.</p>
+<p>This device presents some interesting constraints for small-scale game ...</p>
+                <a class="readmore" href="/midi-rpg.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="/why-and-how-i-made-a-winrt-component.html" rel="bookmark"
+                           title="Permalink to Why and how I made a WinRT Component">Why and how I made a WinRT Component</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2017-01-08T11:58:00+00:00">
                 Published: Sun 08 January 2017
@@ -31,157 +112,17 @@
         </address>
 <p>In <a href="/category/articles.html">articles</a>.</p>
 
-</footer><!-- /.post-info --><p>Now that Windows 10 is a thing and FMOD directly supports a module for it, this topic isn't likely to be important for many people but it was a "must have" for my game for Windows Phone 8.1.</p>
-<h2>Impetus and Background (The Why)</h2>
-<p>I started a "simple" game project based on a puzzle concept that I built in JavaScript.  I had some extra motivation from the <a href="http://ludumdare.com/compo/2014/09/29/october-challenge-2014/">2014</a> and <a href="http://ludumdare.com/compo/2015/09/28/october-challenge-2015/">2015 October Challenge</a> along the way.  (No, I haven't finished yet but that's beside the point!)  To access a market (thereby also increasing complexity) I decided to "go mboile."  I wasn't planning to finish in that single month but again, the motivation was useful.  I chose Microsoft Labs' Win2D as teh graphics tech (Thank you, Shawn Hargreaves and team) and went with C# for implementing an engine.  With the core built I brought someone on board for audio and had a new requirement:  <a href="http://fmod.org" title="FMOD Site">FMOD</a> support.</p>
-<p>Now you might say "what's the big deal?  FMOD supports Windows Phone 8.1 and has C# bindings" and you'd be right excep that they don't have <em>C# bindings on Windows Phone 8.1</em>.  Thus I entered the world of Windows Run-Time Components and C++/CX.</p>
-<p>The first line of research was to look into what my options were. It wasn't long before I put together just why FMOD lacked the module I needed.  THe easiest way to create C# bindings for a C/C++ library (DLL) is to use <a href="https://msdn.microsoft.com/en-us/library/aa288468(v=vs.71).aspx">PInvoke</a>.  If you look at most implementations of C# bindings that's what you'll find:  A thin wraper around a sugar-filled lollipop with a PInvoke center.</p>
-<p>The next stop was to figure out how to avoid that "Binding Cavity" and introduce some API nutrition.  For better or worse Microsfot has Run-Time Components for just this purpose.  Once an RT component is built, it can be used from any language supported by the runtime.  So you coul djust as easily use that component in a JavaScript app as in a C++/CX or C# app (all on a Windows platform, of course).</p>
-<h2>The Good Stuff (The How)</h2>
-<p>So, to the meat of it!  We have FMOD DLLs built for the target platforms - namely Windows Phone 8.1 ARM/x896 and Windows ARM/x86 (i.e. <em>normal Windows Desktop</em>) - and we have .libs and headers to use those DLLs in our C++/CX projects.  Let's take a look:</p>
-<div class="highlight"><pre><span></span><span class="cm">/*$ preserve start $*/</span>
-
-<span class="cm">/*</span>
-<span class="cm">    fmod_studio.h - FMOD Studio API</span>
-<span class="cm">    Copyright (c), Firelight Technologies Pty, Ltd. 2016.</span>
-
-<span class="cm">    This header defines the C API. If you are programming in C++ use fmod_studio.hpp.</span>
-<span class="cm">*/</span>
-
-<span class="cp">#ifndef FMOD_STUDIO_H</span>
-<span class="cp">#define FMOD_STUDIO_H</span>
-
-<span class="cp">#include</span> <span class="cpf">&quot;fmod_studio_common.h&quot;</span><span class="cp"></span>
-
-<span class="cp">#ifdef __cplusplus</span>
-<span class="k">extern</span> <span class="s">&quot;C&quot;</span> 
-<span class="p">{</span>
-<span class="cp">#endif</span>
-
-<span class="cm">/*</span>
-<span class="cm">    Global</span>
-<span class="cm">*/</span>
-<span class="n">FMOD_RESULT</span> <span class="n">F_API</span> <span class="n">FMOD_Studio_ParseID</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">idString</span><span class="p">,</span> <span class="n">FMOD_GUID</span> <span class="o">*</span><span class="n">id</span><span class="p">);</span>
-<span class="n">FMOD_RESULT</span> <span class="n">F_API</span> <span class="nf">FMOD_Studio_System_Create</span><span class="p">(</span><span class="n">FMOD_STUDIO_SYSTEM</span> <span class="o">**</span><span class="n">system</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">headerVersion</span><span class="p">);</span>
-
-<span class="cm">/*$ preserve end $*/</span>
-
-<span class="cm">/*</span>
-<span class="cm">    System</span>
-<span class="cm">*/</span>
-<span class="n">FMOD_BOOL</span>   <span class="n">F_API</span> <span class="nf">FMOD_Studio_System_IsValid</span><span class="p">(</span><span class="n">FMOD_STUDIO_SYSTEM</span> <span class="o">*</span><span class="n">system</span><span class="p">);</span>
-<span class="n">FMOD_RESULT</span> <span class="n">F_API</span> <span class="nf">FMOD_Studio_System_SetAdvancedSettings</span><span class="p">(</span><span class="n">FMOD_STUDIO_SYSTEM</span> <span class="o">*</span><span class="n">system</span><span class="p">,</span> <span class="n">FMOD_STUDIO_ADVANCEDSETTINGS</span> <span class="o">*</span><span class="n">settings</span><span class="p">);</span>
-<span class="n">FMOD_RESULT</span> <span class="n">F_API</span> <span class="nf">FMOD_Studio_System_GetAdvancedSettings</span><span class="p">(</span><span class="n">FMOD_STUDIO_SYSTEM</span> <span class="o">*</span><span class="n">system</span><span class="p">,</span> <span class="n">FMOD_STUDIO_ADVANCEDSETTINGS</span> <span class="o">*</span><span class="n">settings</span><span class="p">);</span>
-<span class="n">FMOD_RESULT</span> <span class="n">F_API</span> <span class="nf">FMOD_Studio_System_Initialize</span><span class="p">(</span><span class="n">FMOD_STUDIO_SYSTEM</span> <span class="o">*</span><span class="n">system</span><span class="p">,</span> <span class="kt">int</span> <span class="n">maxchannels</span><span class="p">,</span> <span class="n">FMOD_STUDIO_INITFLAGS</span> <span class="n">studioflags</span><span class="p">,</span> <span class="n">FMOD_INITFLAGS</span> <span class="n">flags</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">extradriverdata</span><span class="p">);</span>
-<span class="n">FMOD_RESULT</span> <span class="n">F_API</span> <span class="nf">FMOD_Studio_System_Release</span><span class="p">(</span><span class="n">FMOD_STUDIO_SYSTEM</span> <span class="o">*</span><span class="n">system</span><span class="p">);</span>
-<span class="n">FMOD_RESULT</span> <span class="n">F_API</span> <span class="nf">FMOD_Studio_System_Update</span><span class="p">(</span><span class="n">FMOD_STUDIO_SYSTEM</span> <span class="o">*</span><span class="n">system</span><span class="p">);</span>
-</pre></div>
-
-
-<p>It's a pretty straight-forward C API here.  It was refreshing to see a commercial API like this.  It seemd to have a few bits of "history" but with a strong dose of intent.  Now for C++:</p>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">System</span>
-<span class="p">{</span>
-<span class="k">private</span><span class="o">:</span>
-    <span class="c1">// Constructor made private so user cannot statically instance a System class. System::create must be used.</span>
-    <span class="n">System</span><span class="p">();</span>
-    <span class="n">System</span><span class="p">(</span><span class="k">const</span> <span class="n">System</span> <span class="o">&amp;</span><span class="p">);</span>
-
-<span class="k">public</span><span class="o">:</span>
-    <span class="k">static</span> <span class="n">FMOD_RESULT</span> <span class="n">F_API</span> <span class="n">create</span><span class="p">(</span><span class="n">System</span> <span class="o">**</span><span class="n">system</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">headerVersion</span> <span class="o">=</span> <span class="n">FMOD_VERSION</span><span class="p">);</span>
-    <span class="n">FMOD_RESULT</span> <span class="n">F_API</span> <span class="nf">setAdvancedSettings</span><span class="p">(</span><span class="n">FMOD_STUDIO_ADVANCEDSETTINGS</span> <span class="o">*</span><span class="n">settings</span><span class="p">);</span>
-    <span class="n">FMOD_RESULT</span> <span class="n">F_API</span> <span class="nf">getAdvancedSettings</span><span class="p">(</span><span class="n">FMOD_STUDIO_ADVANCEDSETTINGS</span> <span class="o">*</span><span class="n">settings</span><span class="p">);</span>
-    <span class="n">FMOD_RESULT</span> <span class="n">F_API</span> <span class="nf">initialize</span><span class="p">(</span><span class="kt">int</span> <span class="n">maxchannels</span><span class="p">,</span> <span class="n">FMOD_STUDIO_INITFLAGS</span> <span class="n">studioflags</span><span class="p">,</span> <span class="n">FMOD_INITFLAGS</span> <span class="n">flags</span><span class="p">,</span> <span class="kt">void</span> <span class="o">*</span><span class="n">extradriverdata</span><span class="p">);</span>
-    <span class="n">FMOD_RESULT</span> <span class="n">F_API</span> <span class="nf">release</span><span class="p">();</span>
-
-    <span class="c1">// Handle validity</span>
-    <span class="kt">bool</span> <span class="n">F_API</span> <span class="nf">isValid</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span>
-</pre></div>
-
-
-<p>The C++ API is a thin wrapper on the C API.  For my purposes I really only needed FMOD Studio bindings but I did build around a portion of the base FMOD API as well.</p>
-<p>Using the C++ API as a direction, I proceeded to export and otherwise rebind in C++/CX.  The tricky thing is that you can only export Windows Run-Time types such as int, char, classes that reference only those types in their public interfaces, or classes referencing those classes.  Note you can still use non-RT types in non-public contexts.  One primary distinction is that you canot use pointers in the RT interfaces.  Instead CX provides reference types.  That means the RT Component had to manage memory for the C/C++ library while exposing references to the consuming application.</p>
-<p>Okay, so what does the component really look like?  Here is System.h declaring the RT class that wraps the FMOD System:</p>
-<div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="n">FMODStudio</span>
-<span class="p">{</span>
-    <span class="k">public</span> <span class="n">ref</span> <span class="k">class</span> <span class="nc">System</span> <span class="n">sealed</span>
-    <span class="p">{</span>
-    <span class="nl">internal</span><span class="p">:</span>
-        <span class="n">FMOD</span><span class="o">::</span><span class="n">Studio</span><span class="o">::</span><span class="n">System</span><span class="o">*</span> <span class="n">internalSystem</span><span class="p">;</span>
-        <span class="c1">// Constructor made private so user cannot statically instance a System class.  SystemFactory::create must be used.</span>
-
-        <span class="n">System</span><span class="p">(</span><span class="n">FMOD</span><span class="o">::</span><span class="n">Studio</span><span class="o">::</span><span class="n">System</span><span class="o">*</span> <span class="n">system</span><span class="p">);</span>
-
-    <span class="k">public</span><span class="o">:</span>
-        <span class="k">static</span> <span class="n">RESULT</span> <span class="n">create</span><span class="p">(</span><span class="n">System</span><span class="o">^*</span> <span class="n">system</span><span class="p">);</span>
-        <span class="n">RESULT</span> <span class="nf">setAdvancedSettings</span><span class="p">(</span><span class="n">ADVANCEDSETTINGS</span> <span class="n">settings</span><span class="p">);</span>
-        <span class="n">RESULT</span> <span class="nf">getAdvancedSettings</span><span class="p">(</span><span class="n">ADVANCEDSETTINGS</span><span class="o">*</span> <span class="n">settings</span><span class="p">);</span>
-
-        <span class="c1">// Init/Close.</span>
-        <span class="n">RESULT</span> <span class="nf">initialize</span><span class="p">(</span><span class="kt">int</span> <span class="n">maxchannels</span><span class="p">,</span> <span class="n">INITFLAGS</span> <span class="n">studioflags</span><span class="p">,</span> <span class="n">FMODComponent</span><span class="o">::</span><span class="n">INITFLAGS</span> <span class="n">flags</span><span class="p">,</span> <span class="n">uint32</span> <span class="n">extradriverdata</span><span class="p">);</span>
-
-        <span class="n">RESULT</span> <span class="nf">release</span><span class="p">();</span>
-        <span class="n">RESULT</span> <span class="nf">loadBankFile</span><span class="p">(</span><span class="n">Platform</span><span class="o">::</span><span class="n">String</span><span class="o">^</span> <span class="n">name</span><span class="p">,</span> <span class="n">LOAD_BANK_FLAGS</span> <span class="n">flags</span><span class="p">,</span> <span class="n">Bank</span><span class="o">^*</span> <span class="n">bank</span><span class="p">);</span>
-        <span class="n">RESULT</span> <span class="nf">flushCommands</span><span class="p">();</span>
-        <span class="n">RESULT</span> <span class="nf">update</span><span class="p">();</span>
-    <span class="p">};</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>If you're familiar with FMOD Studio's API then you'll note that this is nowhere near the entire API.  I've only implemented what I really needed at the time but it does highlight the types of changes required:</p>
-<ul>
-<li>Using references rather than pointers.  Things like <code>Platform::String^ name</code> and <code>Bank^\* bank</code> are RT references.</li>
-<li>All RT classes must be <code>ref</code> <code>sealed</code>.</li>
-<li>All types/classes used in the public interface must be RT types/classes.</li>
-</ul>
-<p>Practically speaking, in addition to the type changes above, this means the class must manage memory internally and can't return pointers to allocated memory.  Here's a snippet of System.cpp:</p>
-<div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="n">FMODStudio</span>
-<span class="p">{</span>
-    <span class="n">System</span><span class="o">::</span><span class="n">System</span><span class="p">(</span><span class="n">FMOD</span><span class="o">::</span><span class="n">Studio</span><span class="o">::</span><span class="n">System</span><span class="o">*</span> <span class="n">system</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">internalSystem</span> <span class="o">=</span> <span class="n">system</span><span class="p">;</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;system:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">system</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="n">RESULT</span> <span class="n">System</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="n">System</span><span class="o">^*</span> <span class="n">system</span><span class="p">)</span>
-    <span class="p">{</span>
-        <span class="n">FMOD</span><span class="o">::</span><span class="n">Studio</span><span class="o">::</span><span class="n">System</span><span class="o">*</span> <span class="n">fmodStudioSystem</span><span class="p">;</span>
-
-        <span class="n">RESULT</span> <span class="n">result</span> <span class="o">=</span> <span class="p">(</span><span class="n">RESULT</span><span class="p">)</span><span class="n">FMOD</span><span class="o">::</span><span class="n">Studio</span><span class="o">::</span><span class="n">System</span><span class="o">::</span><span class="n">create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">fmodStudioSystem</span><span class="p">);</span>
-        <span class="n">Util</span><span class="o">::</span><span class="n">PrintPointer</span><span class="p">(</span><span class="n">__FILE__</span><span class="p">,</span> <span class="n">__LINE__</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">fmodStudioSystem</span><span class="p">);</span>
-        <span class="n">Util</span><span class="o">::</span><span class="n">PrintPointer</span><span class="p">(</span><span class="n">__FILE__</span><span class="p">,</span> <span class="n">__LINE__</span><span class="p">,</span> <span class="n">fmodStudioSystem</span><span class="p">);</span>
-
-        <span class="k">if</span> <span class="p">(</span><span class="n">result</span> <span class="o">!=</span> <span class="n">RESULT</span><span class="o">::</span><span class="n">OK</span><span class="p">)</span>
-        <span class="p">{</span>
-            <span class="n">fmodStudioSystem</span><span class="o">-&gt;</span><span class="n">release</span><span class="p">();</span>
-
-            <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="o">*</span><span class="n">system</span> <span class="o">=</span> <span class="n">ref</span> <span class="k">new</span> <span class="n">System</span><span class="p">(</span><span class="n">fmodStudioSystem</span><span class="p">);</span>
-        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
-
-<p>Fully learning that and then really "getting it" was a process but basically I tied the FMOD object life-times to RT objects in order to prevent leaks and otherwise made all pointer usage internal to the component.</p>
-<p>In the end I had a run-time component for FMOD that I could use to replace the simple/hacked playback component in my audio system.  Fortunately I'd already designed that as a pluggable system so it was quite easy to drop in an FMOD audio provider.  I can now instantiate FMOD effects, set their parameters and positions, and play them within my mobile game that is otherwise written in C#.</p>
-<h2>Addendum: Python</h2>
-<p>For a later, quick, small, side-project over New Year, I wanted to use FMOD from Python.  Using ctypes on Windows this was much easier than I had anticipated.  See <a href="http://www.fmod.org/questions/question/how-to-use-fmod-from-a-python-script/">This post</a> for more information.</p>
-<p>From a practicality standpoint I did end up wrapping the API in some Python classes.</p>
-<script src="https://bitbucket.org/j3hyde/midiplayground/src/738d8db7ad4d2a835fffb9f5ac908c73e3bb6920/fmod.py?embed=t"></script>
-
-<p>Note how straight-forward that is though.  I really just wanted to abstract the ctypes calls a bit so I didn't have to peppar them throughout my project.  Later on I built a simple sound event system that would call into that FMOD layer.  The bonus of course is that I could replace FMOD if I needed to.  The events were named more for their content than for how they'd be played.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+</footer><!-- /.post-info -->                <p>Now that Windows 10 is a thing and FMOD directly supports a module for it, this topic isn't likely to be important for many people but it was a "must have" for my game for Windows Phone 8.1.</p>
+<h1>Impetus and Background (The Why)</h1>
+<p>I started a "simple" game ...</p>
+                <a class="readmore" href="/why-and-how-i-made-a-winrt-component.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
                     <h1><a href="/practical-classes.html" rel="bookmark"
-                           title="Permalink to "Practical Classes"">"Practical Classes"</a></h1>
+                           title="Permalink to Practical Classes">Practical Classes</a></h1>
                 </header>
 
                 <div class="entry-content">

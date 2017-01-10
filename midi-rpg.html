@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>MIDI RPG</title>
+        <link rel="stylesheet" href="/theme/css/main.css" />
+
+        <!--[if IE]>
+            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+</head>
+
+<body id="index" class="home">
+        <header id="banner" class="body">
+                <h1><a href="/">Tangential Labs </a></h1>
+                <nav><ul>
+                    <li><a href="/category/articles.html">articles</a></li>
+                    <li class="active"><a href="/category/projects.html">projects</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="/midi-rpg.html" rel="bookmark"
+           title="Permalink to MIDI RPG">MIDI RPG</a></h1>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2017-01-10T07:44:26+00:00">
+                Published: Tue 10 January 2017
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="/author/j3hyde.html">j3hyde</a>
+        </address>
+<p>In <a href="/category/projects.html">projects</a>.</p>
+
+</footer><!-- /.post-info -->      <p>Over new year I took some time to revisit my <a href="http://bitbucket.org/j3hyde/midiplayground">MIDI Playground</a> where I put together toys and games using MIDI devices.  In this round I started to build a sort of dungeon RPG that is played on a <a href="https://global.novationmusic.com/launch/launchpad-mini">Launchpad Mini</a>.</p>
+<p>This device presents some interesting constraints for small-scale game development:
+<em> Grid space of just 8×8 plus one row and one column of "extra" buttons
+</em> 16 colors from mixing 4 shades of green and red.
+* MIDI throughput results in noticable latency when writing to the entire grid.</p>
+<p>These gave me a comfortable sense of "you can't do too much" so that I could focus on (quickly?) building a simple space to explore.  The challenge would not lie in building a complex graphics engine but in designing a mechanic that was compelling.</p>
+<h1>Entering the Space; or Interfacing with the Launchpad Mini</h1>
+<p>Fortunately I still had my prior endeavor laying around as a starting point and that made it much easier to get going.  I had implemented Conway's Game of Life with a layer that took care of converting grid output to MIDI and MIDI input to an InputEvent object.  That led me to the next task of determining what colors I actually had to work with.</p>
+<p>After refactoring some of that MIDI layer I opened up a Python interactive prompt, imported by MIDI UI module, and started writing out values to the entire grid in a sequence:</p>
+<div class="highlight"><pre><span></span><span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">rpg</span> <span class="kn">import</span> <span class="n">MidiDriver</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">MidiDriver</span><span class="o">.</span><span class="n">list_devices</span><span class="p">()</span>
+<span class="p">[(</span><span class="s1">&#39;MMSystem&#39;</span><span class="p">,</span> <span class="s1">&#39;Microsoft MIDI Mapper&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;MMSystem&#39;</span><span class="p">,</span> <span class="s1">&#39;Launchpad Mini&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;MMSystem&#39;</span><span class="p">,</span> <span class="s1">&#39;Microsoft GS Wavetable Synth&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="s1">&#39;MMSystem&#39;</span><span class="p">,</span> <span class="s1">&#39;Launchpad Mini&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">md</span> <span class="o">=</span> <span class="n">MidiDriver</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">Opening</span> <span class="n">devices</span><span class="p">:</span>
+        <span class="ow">in</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">pypm</span><span class="o">.</span><span class="n">Input</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x02A03548</span><span class="o">&gt;</span>
+        <span class="ow">in</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">pypm</span><span class="o">.</span><span class="n">Output</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x02A03380</span><span class="o">&gt;</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="n">md</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">x</span><span class="o">%</span><span class="mi">8</span><span class="p">,</span> <span class="n">x</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">64</span><span class="p">)]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">md</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
+</pre></div>
+
+
+<p>This resulted in a nice — albeit repeated — semi-rainbow pattern:</p>
+<p><img alt="Photo of various colors on the Launchpad Mini" src="images/launchpad-mini-first-run.png" /></p>
+<p>What I found interesting here was that each row is repeated and then the four columns are also repeated.  Ultimately I found that it was 16 colors produced by combining four levels each of green and red (from off through three levels of brightness).  After some fiddling I reduced the color formula to this:</p>
+<div class="highlight"><pre><span></span>&gt;&gt;&gt; [md.set(x%4, x/4, x % 4 + x/4*16) for x in range(16)]
+[None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None] 
+&gt;&gt;&gt; md.commit()
+</pre></div>
+
+
+<p>At first these values seemed somewhat arbitrary but it's easier to see the pattern with the binary values.  The code above writes the following values out:</p>
+<table>
+<tr><th>Decimal</th><th>Binary</th></tr>
+<tr><td> 0</td><td>0000 0000</td></tr>
+<tr><td> 1</td><td>0000 0001</td></tr>
+<tr><td> 2</td><td>0000 0010</td></tr>
+<tr><td> 3</td><td>0000 0011</td></tr>
+<tr><td>16</td><td>0001 0000</td></tr>
+<tr><td>17</td><td>0001 0001</td></tr>
+<tr><td>18</td><td>0001 0010</td></tr>
+<tr><td>19</td><td>0001 0011</td></tr>
+<tr><td>32</td><td>0010 0000</td></tr>
+<tr><td>33</td><td>0010 0001</td></tr>
+<tr><td>34</td><td>0010 0010</td></tr>
+<tr><td>35</td><td>0010 0011</td></tr>
+<tr><td>48</td><td>0011 0000</td></tr>
+<tr><td>49</td><td>0011 0001</td></tr>
+<tr><td>50</td><td>0011 0010</td></tr>
+<tr><td>51</td><td>0011 0011</td></tr>
+</table>
+
+<p>Basically the higher four bits are used for the green LED while the lower four bits are used for the red one.  However, since only four levels are used for each, the upper two bits of each nibble is essentially dropped on the floor.  Thus, decimal 4 (binary 0000 0100) has the same effect as decimal 0 and decimal 87 (binary 0101 0111) has the same effect as decimal 19 (0001 0011).</p>
+<p><img alt="Photo of available Launchpad Mini colors" src="images/launchpad-mini-colors.png" /></p>
+<p>So that gave me a palette to work with.  Following that I dug into building a suitable game engine (of sorts).  One of the challenges I set out to solve was the MIDI latency.</p>
+<h1>MIDI Latency</h1>
+<p>Basically if you write out too all of the LEDs at the same time then you can watch the update flow across the device.  For aesthetic reasons I really didn't want to draw the entire grid every frame as it'd simply be too obvious.  My approach was to flip the "normal" draw cycle on its head and only draw an object when it was changed.  Basically it's putting the game into immediate mode drawing instead of stored mode.</p>
+<p>To implement this the grid — a container for game objects — is set to listen for changes on each of its subordinate objects.  In turn there is a view object that listens to the grid.  In the end, one a game object's <code>value</code> property changes, a change event is bubbled up until it gets written out to the device.  In the case of the player moving, the value of the square it is leaving is also updated.</p>
+<p>As this is a turn-based game, game objects don't think until the player takes an action.  To accomodate animation (mainly for a fire effect so far) the game loop calls an animate method on each game object to give them the opportunity to update their value.  As far as the game is concerned though, they don't change state.  In the case of that fire object, it changes value every quarter second and that value bubbles up until the color of its square is updated.</p>
+<h1>Color Tweaks</h1>
+<p>To work with the limited palatte, I figured I'd make the "floor" of the rooms black (i.e. no LEDs on), I'd set the "walls" (by default along the edges) to some color, perhaps set doors to black as well, the player to something reasonable, etc.  But I wasn't sure up front which objects should be what color.  Again, MIDI to the rescue.</p>
+<p>For some time I've been intrigued by the ease with which Digital Audio Workstations (DAWs) — such as Ableton Live — allow you to assign MIDI controls to settings.  You click a button to say "I'm mapping a MIDI control now", turn the physical control you want to use, and voila it's assigned.</p>
+<p>Using a LaunchKey Mini as a MIDI input, I set each of it's eight knobs to select the color of a different object.  I twist one knob to change the player color and another to adjust the wall color etc.</p>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MidiTweakDriver</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device_id</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">pypm</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">device_id</span><span class="p">)</span>
+
+  <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Gets a list of all currently available UI events.&#39;&#39;&#39;</span>
+    <span class="n">events</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">Poll</span><span class="p">():</span>
+      <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">device</span><span class="o">.</span><span class="n">Read</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">control</span><span class="p">,</span> <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map_midi_to_ui</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="n">events</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">control</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">events</span>
+
+  <span class="nd">@classmethod</span>
+  <span class="k">def</span> <span class="nf">map_midi_to_ui</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Maps MIDI message to control and value.&#39;&#39;&#39;</span>
+
+    <span class="n">cmd</span> <span class="o">=</span> <span class="n">message</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mb">0b11110000</span>
+    <span class="n">channel</span> <span class="o">=</span> <span class="n">message</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mb">0b1111</span>
+    <span class="n">control</span> <span class="o">=</span> <span class="n">message</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mb">0b01111111</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="n">message</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mb">0b01111111</span>
+
+    <span class="k">if</span> <span class="n">cmd</span> <span class="o">==</span> <span class="mb">0b10110000</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">control</span> <span class="o">-</span> <span class="mi">21</span><span class="p">,</span> <span class="n">value</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="bp">None</span>
+</pre></div>
+
+
+<p>That chunk of code could use some work but it was enough to allow tweaking of the 16 colors for each object.  Let's walk through it:</p>
+<p><code>pypm.Input(device_id)</code> opens a MIDI device for input.  Pretty simple really.</p>
+<p>In the <code>get()</code> method I'm just polling for any ready MIDI messages and then reading each one off.  For each of those messages I call <code>map_midi_to_ui(message)</code> which does some minor parsing on the control message.</p>
+<p>Those events are used in the main game loop like so:</p>
+<div class="highlight"><pre><span></span><span class="n">tweak_map</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="n">Player</span><span class="p">,</span> <span class="s1">&#39;_value&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">Monster</span><span class="p">,</span> <span class="s1">&#39;_value&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">Wall</span><span class="p">,</span> <span class="s1">&#39;_value&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">Door</span><span class="p">,</span> <span class="s1">&#39;_value&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">Pickup</span><span class="p">,</span> <span class="s1">&#39;_value&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">Fire</span><span class="p">,</span> <span class="s1">&#39;min_value&#39;</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">Fire</span><span class="p">,</span> <span class="s1">&#39;max_value&#39;</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">events</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tweak</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">control</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">events</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">control</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">control</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">tweak_map</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="o">%</span><span class="mi">4</span> <span class="o">+</span> <span class="n">value</span><span class="o">/</span><span class="mi">4</span><span class="o">*</span><span class="mi">16</span>
+
+        <span class="nb">setattr</span><span class="p">(</span><span class="n">tweak_map</span><span class="p">[</span><span class="n">control</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">tweak_map</span><span class="p">[</span><span class="n">control</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">entity</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">get_all_by_type</span><span class="p">(</span><span class="n">tweak_map</span><span class="p">[</span><span class="n">control</span><span class="p">][</span><span class="mi">0</span><span class="p">]):</span>
+            <span class="n">entity</span><span class="o">.</span><span class="n">notify</span><span class="p">()</span>
+</pre></div>
+
+
+<p>Firstly there is a mapping that takes the MIDI control index (from 0 to 7) and gives the game object class as well as the property of the corresponding class that should be tweaked.  In this case I was okay with the hacky "set a class property for global tweaks" as I really just wanted to see the changes across the game and I didn't really intend to keep the functionality around long term.</p>
+<p>Next, for each event I reduce the value range down to the 16 possible values that we can use for color output:  0-3, 16-19, 32-35, 48-51.  I use setattr to blindly set the mapped property (e.g. <code>_value</code>, <code>min_value</code>, or <code>max_value</code>) and finally find every entity for the matched game object class and call <code>notify()</code> to ensure the updated value is written out to the game board.</p>
+<h1>Conclusion</h1>
+<p>I continue to find that MIDI devices as a game space are quite interesting.  They make it pretty easy to get input yet they aren't designed for game control at all.  I think this opens the way for engaging projects.</p>
+<p>Additionally, despite wanting to use these devices as tweak controls during development for a long long time this is the first time I've actually done it.  It was straight-forward to add to the game and gave me immediate feedback from a tactile input:  I could turn a knob and see the change in game world.  In future projects I will have to consider how to build-in a flexible tweak system in early in the development process.</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="http://twitter.com/j3hyde">twitter</a></li>
+                            <li><a href="http://github.com/j3hyde">github</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
