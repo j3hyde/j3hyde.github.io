@@ -1,12 +1,13 @@
-Title: "Practical Classes"
+Title: Practical Classes
 Category: articles
 Date: 2017-01-08 11:56:00
+Status: published
 
 While there are many tutorials out there to impart the wisdom of classes through various incantations of "Cats are animals" there seems to be little in the way of more concrete "this is actually how I'd do it" examples.  This post attempts to fill that gap a bit.
 
 Sometimes it seems that 50% of good code is just having good names for things.  There are various camps about how one should name variables and certainly every programming language has at least one strong opinion about captilization of class names.  In the end, though, it is the names that make sense to a human that are the most useful.  Let us start with a counter example.
 
-## Books, Books, and more books
+# Books, Books, and more books
 
     :::C#
     namespace ClassDemoApp
@@ -136,7 +137,7 @@ This is a step in the right direction but I find there is a lot of power in not 
 
 We didn't do much here but we introduced a .NET generic class called `List`.  The reason I mention it is that it has *absolutely nothing* to do with Books.  The behaviors in these two classes are orthogonal and our class hierarchy can remain flat (and easily maintained).  At this point in my day-to-day coding I tend towards using interfaces rather than subclassing much of the time.  Subclassing is hugely powerful and easily abused.
 
-## Better Game Entities for Home and Abroad
+# Better Game Entities for Home and Abroad
 
 Alright so let's get even more realistic using interfaces and a bit of subclassing.  First an extreme "anti-example":
 
@@ -366,4 +367,6 @@ What you might start to see in this example is a different kind of complexity em
 
 What this comes down to is a sort of weighing the minimum cost involved.  The first might be easier to implement at first but the second method is more scalable.  In this example, you are moving from thinking of subclasses as different types of _things_ to thinking of them as different kinds of _behaviors_.  The concept of 'type' then becomes data on an object rather than a systemic property of the class itself.
 
-Right.  So is that going to help anybody out there?  I don't know but I'd like to hear your thoughts.  Tweet me at @j3hyde.
+# Conclusion
+
+Right.  Is there a conclusion really?  Is that going to help anybody out there?  I don't know but I'd like to hear your thoughts.  Tweet me at @j3hyde.

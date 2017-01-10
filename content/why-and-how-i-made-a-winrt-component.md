@@ -1,10 +1,11 @@
-Title: "Why and how I made a WinRT Component"
+Title: Why and how I made a WinRT Component
 Category: articles
 Date: 2017-01-08 11:58:00
+Status: published
 
 Now that Windows 10 is a thing and FMOD directly supports a module for it, this topic isn't likely to be important for many people but it was a "must have" for my game for Windows Phone 8.1.
 
-## Impetus and Background (The Why)
+# Impetus and Background (The Why)
 I started a "simple" game project based on a puzzle concept that I built in JavaScript.  I had some extra motivation from the [2014](http://ludumdare.com/compo/2014/09/29/october-challenge-2014/) and [2015 October Challenge](http://ludumdare.com/compo/2015/09/28/october-challenge-2015/) along the way.  (No, I haven't finished yet but that's beside the point!)  To access a market (thereby also increasing complexity) I decided to "go mboile."  I wasn't planning to finish in that single month but again, the motivation was useful.  I chose Microsoft Labs' Win2D as teh graphics tech (Thank you, Shawn Hargreaves and team) and went with C# for implementing an engine.  With the core built I brought someone on board for audio and had a new requirement:  [FMOD](http://fmod.org "FMOD Site") support.
 
 Now you might say "what's the big deal?  FMOD supports Windows Phone 8.1 and has C# bindings" and you'd be right excep that they don't have _C# bindings on Windows Phone 8.1_.  Thus I entered the world of Windows Run-Time Components and C++/CX.
@@ -13,7 +14,7 @@ The first line of research was to look into what my options were. It wasn't long
 
 The next stop was to figure out how to avoid that "Binding Cavity" and introduce some API nutrition.  For better or worse Microsfot has Run-Time Components for just this purpose.  Once an RT component is built, it can be used from any language supported by the runtime.  So you coul djust as easily use that component in a JavaScript app as in a C++/CX or C# app (all on a Windows platform, of course).
 
-## The Good Stuff (The How)
+# The Good Stuff (The How)
 So, to the meat of it!  We have FMOD DLLs built for the target platforms - namely Windows Phone 8.1 ARM/x896 and Windows ARM/x86 (i.e. _normal Windows Desktop_) - and we have .libs and headers to use those DLLs in our C++/CX projects.  Let's take a look:
 
     :::C
@@ -147,7 +148,7 @@ Fully learning that and then really "getting it" was a process but basically I t
 
 In the end I had a run-time component for FMOD that I could use to replace the simple/hacked playback component in my audio system.  Fortunately I'd already designed that as a pluggable system so it was quite easy to drop in an FMOD audio provider.  I can now instantiate FMOD effects, set their parameters and positions, and play them within my mobile game that is otherwise written in C#.
 
-## Addendum: Python
+# Addendum: Python
 For a later, quick, small, side-project over New Year, I wanted to use FMOD from Python.  Using ctypes on Windows this was much easier than I had anticipated.  See [This post](http://www.fmod.org/questions/question/how-to-use-fmod-from-a-python-script/) for more information.
 
 From a practicality standpoint I did end up wrapping the API in some Python classes.
