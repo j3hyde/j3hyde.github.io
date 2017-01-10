@@ -5,6 +5,8 @@ Status: draft
 
 # Section
 
+Note: use :put =strftime('%Y-%m-%d %X') to insert current date-time.
+
 ## Subsection
 
 Code Sample:
