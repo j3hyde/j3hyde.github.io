@@ -6,8 +6,13 @@ AUTHOR = u'j3hyde'
 SITENAME = u'Tangential Labs'
 SITEURL = ''
 
+DEFAULT_METADATA = {
+    'status': 'draft'
+}
+
 PATH = 'content'
 OUTPUT_PATH = 'output'
+STATIC_PATHS = ['images']
 
 TIMEZONE = 'Europe/London'
 
