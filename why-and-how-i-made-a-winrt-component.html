@@ -1,43 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="">	
 <head>
-        <meta charset="utf-8" />
-        <title>Why and how I made a WinRT Component</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
+	<meta charset="utf-8"/>
+	<title>Why and how I made a WinRT Component - Tangential Labs</title>	
+	<meta name="author" content="j3hyde">
+	
 
-        <!--[if IE]>
-            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+	<meta name="description" content="Now that Windows 10 is a thing and FMOD directly supports a module for it, this topic isn't likely to be important for many people but it was a "must have" for my game for Windows Phone 8.1. Impetus and Background (The Why) I started a "simple" game ...">
+
+
+	<link rel="top" href="#" /><link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic|Source+Code+Pro' rel='stylesheet' type='text/css'></link>
+	<link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
+		
+
 </head>
+	
+<body>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Tangential Labs </a></h1>
-                <nav><ul>
-                    <li class="active"><a href="/category/articles.html">articles</a></li>
-                    <li><a href="/category/projects.html">projects</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-<section id="content" class="body">
-  <article>
-    <header>
-      <h1 class="entry-title">
-        <a href="/why-and-how-i-made-a-winrt-component.html" rel="bookmark"
-           title="Permalink to Why and how I made a WinRT Component">Why and how I made a WinRT Component</a></h1>
-    </header>
+    <div class="container">
+	  
+	  <header role="banner">
+	    <div class="feeds">
+	    </div>
+		<a href="" class="title">Tangential Labs</a>
+      </header>
+	
+	  <div class="wrapper">
 
-    <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2017-01-08T11:58:00+00:00">
-                Published: Sun 08 January 2017
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/j3hyde.html">j3hyde</a>
-        </address>
-<p>In <a href="/category/articles.html">articles</a>.</p>
-
-</footer><!-- /.post-info -->      <p>Now that Windows 10 is a thing and FMOD directly supports a module for it, this topic isn't likely to be important for many people but it was a "must have" for my game for Windows Phone 8.1.</p>
+		  <div role="main" class="content">
+	<article class="full">
+			
+		<h1>Why and how I made a WinRT Component</h1>
+		
+<div class="metadata">
+  <time datetime="2017-01-08T11:58:00+00:00" pubdate>Sun 08 January 2017</time>
+    <address class="vcard author">
+      by <a class="url fn" href="/author/j3hyde.html">j3hyde</a>
+    </address>
+  in <a href="/category/articles.html">articles</a>
+</div>		
+		<p>Now that Windows 10 is a thing and FMOD directly supports a module for it, this topic isn't likely to be important for many people but it was a "must have" for my game for Windows Phone 8.1.</p>
 <h1>Impetus and Background (The Why)</h1>
 <p>I started a "simple" game project based on a puzzle concept that I built in JavaScript.  I had some extra motivation from the <a href="http://ludumdare.com/compo/2014/09/29/october-challenge-2014/">2014</a> and <a href="http://ludumdare.com/compo/2015/09/28/october-challenge-2015/">2015 October Challenge</a> along the way.  (No, I haven't finished yet but that's beside the point!)  To access a market (thereby also increasing complexity) I decided to "go mboile."  I wasn't planning to finish in that single month but again, the motivation was useful.  I chose Microsoft Labs' Win2D as teh graphics tech (Thank you, Shawn Hargreaves and team) and went with C# for implementing an engine.  With the core built I brought someone on board for audio and had a new requirement:  <a href="http://fmod.org" title="FMOD Site">FMOD</a> support.</p>
 <p>Now you might say "what's the big deal?  FMOD supports Windows Phone 8.1 and has C# bindings" and you'd be right excep that they don't have <em>C# bindings on Windows Phone 8.1</em>.  Thus I entered the world of Windows Run-Time Components and C++/CX.</p>
@@ -177,29 +179,50 @@
 <p>From a practicality standpoint I did end up wrapping the API in some Python classes.</p>
 <script src="https://bitbucket.org/j3hyde/midiplayground/src/738d8db7ad4d2a835fffb9f5ac908c73e3bb6920/fmod.py?embed=t"></script>
 
-<p>Note how straight-forward that is though.  I really just wanted to abstract the ctypes calls a bit so I didn't have to peppar them throughout my project.  Later on I built a simple sound event system that would call into that FMOD layer.  The bonus of course is that I could replace FMOD if I needed to.  The events were named more for their content than for how they'd be played.</p>
-    </div><!-- /.entry-content -->
+<p>Note how straight-forward that is though.  I really just wanted to abstract the ctypes calls a bit so I didn't have to peppar them throughout my project.  Later on I built a simple sound event system that would call into that FMOD layer.  The bonus of course is that I could replace FMOD if I needed to.  The events were named more for their content than for how they'd be played.</p>	
 
-  </article>
-</section>
-        <section id="extras" class="body">
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
+	</article>
 
-                            <li><a href="http://twitter.com/j3hyde">twitter</a></li>
-                            <li><a href="http://github.com/j3hyde">github</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+    <p>
+	<a href="https://twitter.com/share" class="twitter-share-button" data-via="" data-lang="en" data-size="large" data-related="">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	</p>
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+		  </div>	
+		  
+		  <div class="sidebar">
+
+	        <nav>
+	          <h2>Categories</h2>
+	          <ul>
+	              <li class="active"><a href="/category/articles.html">articles</a></li>
+	              <li ><a href="/category/projects.html">projects</a></li>
+	          </ul>
+	        </nav>
+
+	          <aside>
+	          <h2>Social</h2>
+			    <ul class="social">
+				  <li><a href="http://twitter.com/j3hyde">twitter</a><i></i></li>
+				  <li><a href="http://github.com/j3hyde">github</a><i></i></li>
+			    </ul>
+			  </aside>
+
+
+		  </div>
+
+	  </div>
+
+      <footer>
+		<p role="contentinfo">
+		  © 2013 j3hyde - Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>. Theme <a href="https://github.com/fle/pelican-simplegrey">pelican-simplegrey</a>.
+    	</p>
+
+	  </footer>	
+
+	</div>
+	
 
 </body>
 </html>

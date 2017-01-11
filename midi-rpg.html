@@ -1,43 +1,45 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="">	
 <head>
-        <meta charset="utf-8" />
-        <title>MIDI RPG</title>
-        <link rel="stylesheet" href="/theme/css/main.css" />
+	<meta charset="utf-8"/>
+	<title>MIDI RPG - Tangential Labs</title>	
+	<meta name="author" content="j3hyde">
+	
 
-        <!--[if IE]>
-            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
+	<meta name="description" content="Over new year I took some time to revisit my MIDI Playground where I put together toys and games using MIDI devices. In this round I started to build a sort of dungeon RPG that is played on a Launchpad Mini. This device presents some interesting constraints for small-scale game ...">
+
+
+	<link rel="top" href="#" /><link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic|Source+Code+Pro' rel='stylesheet' type='text/css'></link>
+	<link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
+		
+
 </head>
+	
+<body>
 
-<body id="index" class="home">
-        <header id="banner" class="body">
-                <h1><a href="/">Tangential Labs </a></h1>
-                <nav><ul>
-                    <li><a href="/category/articles.html">articles</a></li>
-                    <li class="active"><a href="/category/projects.html">projects</a></li>
-                </ul></nav>
-        </header><!-- /#banner -->
-<section id="content" class="body">
-  <article>
-    <header>
-      <h1 class="entry-title">
-        <a href="/midi-rpg.html" rel="bookmark"
-           title="Permalink to MIDI RPG">MIDI RPG</a></h1>
-    </header>
+    <div class="container">
+	  
+	  <header role="banner">
+	    <div class="feeds">
+	    </div>
+		<a href="" class="title">Tangential Labs</a>
+      </header>
+	
+	  <div class="wrapper">
 
-    <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2017-01-10T07:44:26+00:00">
-                Published: Tue 10 January 2017
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="/author/j3hyde.html">j3hyde</a>
-        </address>
-<p>In <a href="/category/projects.html">projects</a>.</p>
-
-</footer><!-- /.post-info -->      <p>Over new year I took some time to revisit my <a href="http://bitbucket.org/j3hyde/midiplayground">MIDI Playground</a> where I put together toys and games using MIDI devices.  In this round I started to build a sort of dungeon RPG that is played on a <a href="https://global.novationmusic.com/launch/launchpad-mini">Launchpad Mini</a>.</p>
+		  <div role="main" class="content">
+	<article class="full">
+			
+		<h1>MIDI RPG</h1>
+		
+<div class="metadata">
+  <time datetime="2017-01-10T07:44:26+00:00" pubdate>Tue 10 January 2017</time>
+    <address class="vcard author">
+      by <a class="url fn" href="/author/j3hyde.html">j3hyde</a>
+    </address>
+  in <a href="/category/projects.html">projects</a>
+</div>		
+		<p>Over new year I took some time to revisit my <a href="http://bitbucket.org/j3hyde/midiplayground">MIDI Playground</a> where I put together toys and games using MIDI devices.  In this round I started to build a sort of dungeon RPG that is played on a <a href="https://global.novationmusic.com/launch/launchpad-mini">Launchpad Mini</a>.</p>
 <p>This device presents some interesting constraints for small-scale game development:
 <em> Grid space of just 8×8 plus one row and one column of "extra" buttons
 </em> 16 colors from mixing 4 shades of green and red.
@@ -157,29 +159,50 @@
 <p>Next, for each event I reduce the value range down to the 16 possible values that we can use for color output:  0-3, 16-19, 32-35, 48-51.  I use setattr to blindly set the mapped property (e.g. <code>_value</code>, <code>min_value</code>, or <code>max_value</code>) and finally find every entity for the matched game object class and call <code>notify()</code> to ensure the updated value is written out to the game board.</p>
 <h1>Conclusion</h1>
 <p>I continue to find that MIDI devices as a game space are quite interesting.  They make it pretty easy to get input yet they aren't designed for game control at all.  I think this opens the way for engaging projects.</p>
-<p>Additionally, despite wanting to use these devices as tweak controls during development for a long long time this is the first time I've actually done it.  It was straight-forward to add to the game and gave me immediate feedback from a tactile input:  I could turn a knob and see the change in game world.  In future projects I will have to consider how to build-in a flexible tweak system in early in the development process.</p>
-    </div><!-- /.entry-content -->
+<p>Additionally, despite wanting to use these devices as tweak controls during development for a long long time this is the first time I've actually done it.  It was straight-forward to add to the game and gave me immediate feedback from a tactile input:  I could turn a knob and see the change in game world.  In future projects I will have to consider how to build-in a flexible tweak system in early in the development process.</p>	
 
-  </article>
-</section>
-        <section id="extras" class="body">
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
+	</article>
 
-                            <li><a href="http://twitter.com/j3hyde">twitter</a></li>
-                            <li><a href="http://github.com/j3hyde">github</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+    <p>
+	<a href="https://twitter.com/share" class="twitter-share-button" data-via="" data-lang="en" data-size="large" data-related="">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	</p>
 
-        <footer id="contentinfo" class="body">
-                <address id="about" class="vcard body">
-                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
-                </address><!-- /#about -->
 
-                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
-        </footer><!-- /#contentinfo -->
+		  </div>	
+		  
+		  <div class="sidebar">
+
+	        <nav>
+	          <h2>Categories</h2>
+	          <ul>
+	              <li ><a href="/category/articles.html">articles</a></li>
+	              <li class="active"><a href="/category/projects.html">projects</a></li>
+	          </ul>
+	        </nav>
+
+	          <aside>
+	          <h2>Social</h2>
+			    <ul class="social">
+				  <li><a href="http://twitter.com/j3hyde">twitter</a><i></i></li>
+				  <li><a href="http://github.com/j3hyde">github</a><i></i></li>
+			    </ul>
+			  </aside>
+
+
+		  </div>
+
+	  </div>
+
+      <footer>
+		<p role="contentinfo">
+		  © 2013 j3hyde - Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>. Theme <a href="https://github.com/fle/pelican-simplegrey">pelican-simplegrey</a>.
+    	</p>
+
+	  </footer>	
+
+	</div>
+	
 
 </body>
 </html>
