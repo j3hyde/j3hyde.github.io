@@ -38,6 +38,7 @@ body {
   color: #4D4D4C;
   padding: 0;
   min-width: 740px;
+  background-color: white;
 }
 
 header {
@@ -73,43 +74,6 @@ footer {
   font-size: 0.8em;
 }
 
-/* Tables */
-table {margin: .5em auto 1.5em auto; width: 98%;}
-	
-	/* Thead */
-	thead th {padding: .5em .4em; text-align: left;}
-	thead td {}
-
-	/* Tbody */
-	tbody td {
-            padding: .5em .4em;
-            border-top: 1px solid #E5E5E3;
-        }
-	tbody th {}
-	
-	tbody .alt td {}
-	tbody .alt th {}
-	
-	/* Tfoot */
-	tfoot th {}
-	tfoot td {}
-
-        thead {
-            border-bottom: 2px solid #E5E5E3;
-        }
-
-table.center td, table.center th {
-    text-align: center;
-}
-
-td.left, th.left{
-    text-align: center;
-}
-
-td.right, th.right {
-    text-align: center;
-}
-	
 
 /* Header */
 
@@ -172,6 +136,10 @@ h1 {
 h1 a {
   color: inherit;
   border-bottom: none;
+}
+
+h3 {
+  font-style: italic;
 }
 
 

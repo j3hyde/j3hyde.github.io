@@ -6,14 +6,14 @@
 	<meta name="author" content="j3hyde">
 	
 
-	<meta name="description" content="Over new year I took some time to revisit my MIDI Playground where I put together toys and games using MIDI devices. In this round I started to build a sort of dungeon RPG that is played on a Launchpad Mini. This device presents some interesting constraints for small-scale game ...">
+	<meta name="description" content="Over new year I took some time to revisit my MIDI Playground where I put together toys and games using MIDI devices. In this round I started to build a sort of dungeon RPG that is played on a Launchpad Mini. This device presents some interesting constraints for small-scale game …">
 
 
 	<link rel="top" href="#" /><link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic|Source+Code+Pro' rel='stylesheet' type='text/css'></link>
-	<link rel="stylesheet" href="http://j3hyde.github.io/theme/css/main.css" type="text/css" />
+	<link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
 		
+        <script defer src="https://use.fontawesome.com/releases/v5.0.3/js/all.js"></script>
 
-    <link href="http://j3hyde.github.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Tangential Labs Atom Feed" />
 </head>
 	
 <body>
@@ -22,9 +22,8 @@
 	  
 	  <header role="banner">
 	    <div class="feeds">
-	        <a href="http://j3hyde.github.io/feeds/all.atom.xml" rel="alternate"><img src="http://j3hyde.github.io/theme/images/icons/feed-32px.png" alt="atom feed"/></a>
 	    </div>
-		<a href="http://j3hyde.github.io" class="title">Tangential Labs</a>
+		<a href="" class="title">Tangential Labs</a>
       </header>
 	
 	  <div class="wrapper">
@@ -37,9 +36,9 @@
 <div class="metadata">
   <time datetime="2017-01-10T07:44:26+00:00" pubdate>Tue 10 January 2017</time>
     <address class="vcard author">
-      by <a class="url fn" href="http://j3hyde.github.io/author/j3hyde.html">j3hyde</a>
+      by <a class="url fn" href="/author/j3hyde.html">j3hyde</a>
     </address>
-  in <a href="http://j3hyde.github.io/category/projects.html">projects</a>
+  in <a href="/category/projects.html">projects</a>
 </div>		
 		<p>Over new year I took some time to revisit my <a href="http://bitbucket.org/j3hyde/midiplayground">MIDI Playground</a> where I put together toys and games using MIDI devices.  In this round I started to build a sort of dungeon RPG that is played on a <a href="https://global.novationmusic.com/launch/launchpad-mini">Launchpad Mini</a>.</p>
 <p>This device presents some interesting constraints for small-scale game development:
@@ -63,7 +62,7 @@
 
 
 <p>This resulted in a nice — albeit repeated — semi-rainbow pattern:</p>
-<p><img alt="Photo of various colors on the Launchpad Mini" src="images/launchpad-mini-first-run.png" /></p>
+<p><img alt="Photo of various colors on the Launchpad Mini" src="images/launchpad-mini-first-run.png"></p>
 <p>What I found interesting here was that each row is repeated and then the four columns are also repeated.  Ultimately I found that it was 16 colors produced by combining four levels each of green and red (from off through three levels of brightness).  After some fiddling I reduced the color formula to this:</p>
 <div class="highlight"><pre><span></span>&gt;&gt;&gt; [md.set(x%4, x/4, x % 4 + x/4*16) for x in range(16)]
 [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None] 
@@ -72,7 +71,7 @@
 
 
 <p>At first these values seemed somewhat arbitrary but it's easier to see the pattern with the binary values.  The code above writes the following values out:</p>
-<table class="center">
+<table>
 <tr><th>Decimal</th><th>Binary</th></tr>
 <tr><td> 0</td><td>0000 0000</td></tr>
 <tr><td> 1</td><td>0000 0001</td></tr>
@@ -92,82 +91,8 @@
 <tr><td>51</td><td>0011 0011</td></tr>
 </table>
 
-<table>
-<thead>
-<tr>
-<th align="center">Decimal</th>
-<th align="center">Binary</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td align="center">0</td>
-<td align="center">0000 0000</td>
-</tr>
-<tr>
-<td align="center">1</td>
-<td align="center">0000 0001</td>
-</tr>
-<tr>
-<td align="center">2</td>
-<td align="center">0000 0010</td>
-</tr>
-<tr>
-<td align="center">3</td>
-<td align="center">0000 0011</td>
-</tr>
-<tr>
-<td align="center">16</td>
-<td align="center">0001 0000</td>
-</tr>
-<tr>
-<td align="center">17</td>
-<td align="center">0001 0001</td>
-</tr>
-<tr>
-<td align="center">18</td>
-<td align="center">0001 0010</td>
-</tr>
-<tr>
-<td align="center">19</td>
-<td align="center">0001 0011</td>
-</tr>
-<tr>
-<td align="center">32</td>
-<td align="center">0010 0000</td>
-</tr>
-<tr>
-<td align="center">33</td>
-<td align="center">0010 0001</td>
-</tr>
-<tr>
-<td align="center">34</td>
-<td align="center">0010 0010</td>
-</tr>
-<tr>
-<td align="center">35</td>
-<td align="center">0010 0011</td>
-</tr>
-<tr>
-<td align="center">48</td>
-<td align="center">0011 0000</td>
-</tr>
-<tr>
-<td align="center">49</td>
-<td align="center">0011 0001</td>
-</tr>
-<tr>
-<td align="center">50</td>
-<td align="center">0011 0010</td>
-</tr>
-<tr>
-<td align="center">51</td>
-<td align="center">0011 0011</td>
-</tr>
-</tbody>
-</table>
 <p>Basically the higher four bits are used for the green LED while the lower four bits are used for the red one.  However, since only four levels are used for each, the upper two bits of each nibble is essentially dropped on the floor.  Thus, decimal 4 (binary 0000 0100) has the same effect as decimal 0 and decimal 87 (binary 0101 0111) has the same effect as decimal 19 (0001 0011).</p>
-<p><img alt="Photo of available Launchpad Mini colors" src="images/launchpad-mini-colors.png" /></p>
+<p><img alt="Photo of available Launchpad Mini colors" src="images/launchpad-mini-colors.png"></p>
 <p>So that gave me a palette to work with.  Following that I dug into building a suitable game engine (of sorts).  One of the challenges I set out to solve was the MIDI latency.</p>
 <h1>MIDI Latency</h1>
 <p>Basically if you write out too all of the LEDs at the same time then you can watch the update flow across the device.  For aesthetic reasons I really didn't want to draw the entire grid every frame as it'd simply be too obvious.  My approach was to flip the "normal" draw cycle on its head and only draw an object when it was changed.  Basically it's putting the game into immediate mode drawing instead of stored mode.</p>
@@ -178,7 +103,7 @@
 <p>For some time I've been intrigued by the ease with which Digital Audio Workstations (DAWs) — such as Ableton Live — allow you to assign MIDI controls to settings.  You click a button to say "I'm mapping a MIDI control now", turn the physical control you want to use, and voila it's assigned.</p>
 <p>Using a LaunchKey Mini as a MIDI input, I set each of it's eight knobs to select the color of a different object.  I twist one knob to change the player color and another to adjust the wall color etc.</p>
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MidiTweakDriver</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-  <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device_id</span><span class="p">):</span>
+  <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device_id</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">device</span> <span class="o">=</span> <span class="n">pypm</span><span class="o">.</span><span class="n">Input</span><span class="p">(</span><span class="n">device_id</span><span class="p">)</span>
 
   <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -191,7 +116,7 @@
     <span class="k">return</span> <span class="n">events</span>
 
   <span class="nd">@classmethod</span>
-  <span class="k">def</span> <span class="nf">map_midi_to_ui</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+  <span class="k">def</span> <span class="nf">map_midi_to_ui</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Maps MIDI message to control and value.&#39;&#39;&#39;</span>
 
     <span class="n">cmd</span> <span class="o">=</span> <span class="n">message</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mb">0b11110000</span>
@@ -252,8 +177,8 @@
 	        <nav>
 	          <h2>Categories</h2>
 	          <ul>
-	              <li ><a href="http://j3hyde.github.io/category/articles.html">articles</a></li>
-	              <li class="active"><a href="http://j3hyde.github.io/category/projects.html">projects</a></li>
+	              <li ><a href="/category/articles.html">articles</a></li>
+	              <li class="active"><a href="/category/projects.html">projects</a></li>
 	          </ul>
 	        </nav>
 
@@ -272,19 +197,13 @@
 
       <footer>
 		<p role="contentinfo">
-		  © 2013 j3hyde - Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>. Theme <a href="https://github.com/fle/pelican-simplegrey">pelican-simplegrey</a>.
+		  © 2013 j3hyde - Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>. Theme based on <a href="https://github.com/fle/pelican-simplegrey">pelican-simplegrey</a>.
     	</p>
 
 	  </footer>	
 
 	</div>
 	
-	  <script>
-		var _gaq=[['_setAccount','UA-341823-8'],['_trackPageview']];
-		(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-		g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-		s.parentNode.insertBefore(g,s)}(document,'script'));
-	  </script>
 
 </body>
 </html>

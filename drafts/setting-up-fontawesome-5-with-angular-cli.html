@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="">	
+<head>
+	<meta charset="utf-8"/>
+	<title>Setting up Fontawesome 5 with Angular-CLI - Tangential Labs</title>	
+	<meta name="author" content="j3hyde">
+	
+
+	<meta name="description" content="Intro I was recently building a simple app for a family member and went with Angular. I decided to use current versions of everything to get well up to speed so I grabbed Angular-CLI and Bootstrap 4. On top of that I wanted an icon pack and Font Awesome has …">
+
+
+	<link rel="top" href="#" /><link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,300italic,400italic,600italic|Source+Code+Pro' rel='stylesheet' type='text/css'></link>
+	<link rel="stylesheet" href="/theme/css/main.css" type="text/css" />
+		
+        <script defer src="https://use.fontawesome.com/releases/v5.0.3/js/all.js"></script>
+
+</head>
+	
+<body>
+
+    <div class="container">
+	  
+	  <header role="banner">
+	    <div class="feeds">
+	    </div>
+		<a href="" class="title">Tangential Labs</a>
+      </header>
+	
+	  <div class="wrapper">
+
+		  <div role="main" class="content">
+	<article class="full">
+			
+		<h1>Setting up Fontawesome 5 with Angular-CLI</h1>
+		
+<div class="metadata">
+  <time datetime="2018-01-11T07:53:42+00:00" pubdate>Thu 11 January 2018</time>
+    <address class="vcard author">
+      by <a class="url fn" href="/author/j3hyde.html">j3hyde</a>
+    </address>
+  in <a href="/category/articles.html">articles</a>
+</div>		
+		<h1>Intro</h1>
+<p>I was recently building a simple app for a family member and went with <a href="https://angular.io/">Angular</a>.  I decided to use current versions of everything to get well up to speed so I grabbed <a href="https://cli.angular.io/">Angular-CLI</a> and <a href="https://getbootstrap.com/">Bootstrap 4</a>.  On top of that I wanted an icon pack and <a href="http://fontawesome.io/">Font Awesome</a> has always been a reliable goto.  Introducing <a href="https://fontawesome.com">Font Awesome 5</a>:  A total redesign and full support for SVG icons.  Trouble is there is little to no information on how best to get it set up with <a href="https://cli.angular.io/">Angular-CLI</a>.  Let's do that here....</p>
+<h1>Font Awesome 5</h1>
+<p>First thing first, Font Awesome 5 offers two types of icons (webfont vs. SVG) across three different free packs (regular, solid, and brands).  For CSS they also give you the option of using Sass or Less templates rather than only compiled CSS so that you can customize Font Awesome to your liking.  We won't go that far here but it's good to know we have the option.</p>
+<h2>Installation for SVG</h2>
+<p>You'll want to install whichever packs you need (or all of them!).  We'll start with the SVG versions as that is recommended and gives you a ton of options for shape <a href="https://fontawesome.com/how-to-use/svg-with-js#power-transforms">transforms</a>, <a href="https://fontawesome.com/how-to-use/svg-with-js#masking">masking</a> and <a href="https://fontawesome.com/how-to-use/svg-with-js#layering">color</a>:</p>
+<div class="highlight"><pre><span></span>npm install --save @fortawesome/fontawesome
+npm install --save @fortawesome/fontawesome-free-regular
+npm install --save @fortawesome/fontawesome-free-solid
+npm install --save @fortawesome/fontawesome-free-brands
+</pre></div>
+
+
+<h2>Installation for CSS/SCSS/LESS/Webfonts</h2>
+<p>For those wanting to go with straight CSS, you'll want this package:</p>
+<div class="highlight"><pre><span></span>npm install --save @fortawesome/fontawesome-free-webfonts
+</pre></div>
+
+
+<h1>Angular-CLI</h1>
+<p>Fortunately there isn't a whole lot to do in Angular-CLI as the tooling is already comprehensive.</p>
+<h2>Configuring for SVG</h2>
+<p>With Angular-CLI you have a couple options for 
+When using the SVG icons you have one easy place to change.  Since the entirety of the SVG icon set is stored as and accessed via JavaScript we have only to add the core scripts to our project.</p>
+<p>Edit your .angular-cli.json file, find the <code>scripts</code> section, and add in the core script plus whichever packs you want:</p>
+<div class="highlight"><pre><span></span>&quot;scripts&quot;: [
+  &quot;../node_modules/@fortawesome/fontawesome/index.js&quot;,
+  &quot;../node_modules/@fortawesome/fontawesome-free-regular/index.js&quot;
+  &quot;../node_modules/@fortawesome/fontawesome-free-solid/index.js&quot;
+  &quot;../node_modules/@fortawesome/fontawesome-free-brands/index.js&quot;
+],
+</pre></div>
+
+
+<p>That's it!  Now in your HTML templates you can use the Font Awesome icons.  The scripts above will find all fa* classes and splice in the SVG icons where needed.</p>
+<h2>Configuring for CSS/SCSS/LESS/Webfonts</h2>
+<p>If you want to use the CSS method you potentially give yourself a ton of control for modifying Sass or Less templates.  With Angular-CLI you have two places where you can add in Font Awesome depending on your preference.</p>
+<h3>Option 1:  Configure for CSS in .angular-cli.json</h3>
+<p>If you are going to use CSS then you can add Font Awesome to the <code>styles</code> section of your configuration:</p>
+<div class="highlight"><pre><span></span>&quot;styles&quot;: [
+  &quot;styles.scss&quot;
+  &quot;../node_modules/@fortawesome/fontawesome-free-webfonts/css/fontawesome.css&quot;,
+  &quot;../node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-solid.css&quot;,
+  &quot;../node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-regular.css&quot;,
+  &quot;../node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-brands.css&quot;,
+],
+</pre></div>
+
+
+<h3>Option 2:  Configure for CSS in your styles.css</h3>
+<p>For CSS you can instead import into your styles.css like so:</p>
+<div class="highlight"><pre><span></span><span class="cp">@import</span> <span class="s2">&quot;../node_modules/@fortawesome/fontawesome-free-webfonts/css/fontawesome.css&quot;</span><span class="p">;</span>
+<span class="cp">@import</span> <span class="s2">&quot;../node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-solid.css&quot;</span><span class="p">;</span>
+</pre></div>
+
+
+<h3>Option 3:  Configure for Sass (or Less) in your styles.scss</h3>
+<p>For using Sass or Less you have to specify the font path in your styles.scss:</p>
+<div class="highlight"><pre><span></span><span class="n">$fa</span><span class="o">-</span><span class="n">font</span><span class="o">-</span><span class="n">path</span><span class="o">:</span> <span class="s">&quot;../node_modules/@fortawesome/fontawesome-free-webfonts/webfonts&quot;</span><span class="p">;</span>
+<span class="cp">@import</span> <span class="s2">&quot;../node_modules/@fortawesome/fontawesome-free-webfonts/scss/fontawesome.scss&quot;</span><span class="p">;</span>
+<span class="cp">@import</span> <span class="s2">&quot;../node_modules/@fortawesome/fontawesome-free-webfonts/scss/fa-solid.scss&quot;</span><span class="p">;</span>
+</pre></div>
+
+
+<h1>Conclusion</h1>
+<p>With that you should have a functional set up for Angular-CLI and Font Awesome 5!  Take a look through the Font Awesome 5 docs and discover all the cool things you can do.</p>
+<div class="highlight"><pre><span></span><span class="nt">&lt;span</span> <span class="na">class=</span><span class="s">&quot;fa-layers fa-fw fa-2x&quot;</span> <span class="na">style=</span><span class="s">&quot;background:MistyRose&quot;</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">&quot;fas fa-bookmark&quot;</span><span class="nt">&gt;&lt;/i&gt;</span>
+  <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">&quot;fa-inverse fas fa-heart&quot;</span> <span class="na">data-fa-transform=</span><span class="s">&quot;shrink-10 up-2&quot;</span> <span class="na">style=</span><span class="s">&quot;color:Tomato&quot;</span><span class="nt">&gt;&lt;/i&gt;</span>
+<span class="nt">&lt;/span&gt;</span>
+</pre></div>
+
+
+<p><span class="fa-layers fa-fw fa-2x" style="background:MistyRose">
+<i class="fas fa-bookmark"></i>
+<i class="fa-inverse fas fa-heart" data-fa-transform="shrink-10 up-2" style="color:Tomato"></i>
+</span></p>
+<p>Voila!</p>	
+
+	</article>
+
+    <p>
+	<a href="https://twitter.com/share" class="twitter-share-button" data-via="" data-lang="en" data-size="large" data-related="">Tweet</a>
+	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+	</p>
+
+
+		  </div>	
+		  
+		  <div class="sidebar">
+
+	        <nav>
+	          <h2>Categories</h2>
+	          <ul>
+	              <li class="active"><a href="/category/articles.html">articles</a></li>
+	              <li ><a href="/category/projects.html">projects</a></li>
+	          </ul>
+	        </nav>
+
+	          <aside>
+	          <h2>Social</h2>
+			    <ul class="social">
+				  <li><a href="http://twitter.com/j3hyde">twitter</a><i></i></li>
+				  <li><a href="http://github.com/j3hyde">github</a><i></i></li>
+			    </ul>
+			  </aside>
+
+
+		  </div>
+
+	  </div>
+
+      <footer>
+		<p role="contentinfo">
+		  © 2013 j3hyde - Proudly powered by <a href="http://alexis.notmyidea.org/pelican/">pelican</a>. Theme based on <a href="https://github.com/fle/pelican-simplegrey">pelican-simplegrey</a>.
+    	</p>
+
+	  </footer>	
+
+	</div>
+	
+
+</body>
+</html>
