@@ -3,34 +3,6 @@ Category: articles
 Date: 2018-01-11 07:53:42
 Status: draft
 
-# Section
-
-Note: use :put =strftime('%Y-%m-%d %X') to insert current date-time.
-
-## Subsection
-
-Code Sample:
-
-    :::C#
-    namespace ClassDemoApp
-    {
-        class Book
-        {
-            public void open()
-            {
-                System.Diagnostics.Debug.WriteLine("Book is open!");
-            }
-        }
-    }
-
-HTML:
-
-<em>Howdy</em>
-
-Link: [The Text](http://j3hyde.github.io)
-
-
-
 # Intro
 I was recently building a simple app for a family member and went with [Angular](https://angular.io/).  I decided to use current versions of everything to get well up to speed so I grabbed [Angular-CLI](https://cli.angular.io/) and [Bootstrap 4](https://getbootstrap.com/).  On top of that I wanted an icon pack and [Font Awesome](http://fontawesome.io/) has always been a reliable goto.  Introducing [Font Awesome 5](https://fontawesome.com):  A total redesign and full support for SVG icons.  Trouble is there is little to no information on how best to get it set up with [Angular-CLI](https://cli.angular.io/).  Let's do that here....
 
@@ -72,7 +44,7 @@ That's it!  Now in your HTML templates you can use the Font Awesome icons.  The 
 ## Configuring for CSS/SCSS/LESS/Webfonts
 If you want to use the CSS method you potentially give yourself a ton of control for modifying Sass or Less templates.  With Angular-CLI you have two places where you can add in Font Awesome depending on your preference.
 
-### In .angular-cli.json
+### Option 1:  Configure for CSS in .angular-cli.json
 If you are going to use CSS then you can add Font Awesome to the `styles` section of your configuration:
 
     "styles": [
@@ -84,12 +56,13 @@ If you are going to use CSS then you can add Font Awesome to the `styles` sectio
     ],
 
 
-### In your styles.css or styles.scss
+### Option 2:  Configure for CSS in your styles.css
 For CSS you can instead import into your styles.css like so:
 
     @import "../node_modules/@fortawesome/fontawesome-free-webfonts/css/fontawesome.css";
     @import "../node_modules/@fortawesome/fontawesome-free-webfonts/css/fa-solid.css";
 
+### Option 3:  Configure for Sass (or Less) in your styles.scss
 For using Sass or Less you have to specify the font path in your styles.scss:
 
     $fa-font-path: "../node_modules/@fortawesome/fontawesome-free-webfonts/webfonts";
@@ -100,7 +73,14 @@ For using Sass or Less you have to specify the font path in your styles.scss:
 # Conclusion
 With that you should have a functional set up for Angular-CLI and Font Awesome 5!  Take a look through the Font Awesome 5 docs and discover all the cool things you can do.
 
-    <span class="fa-layers fa-fw" style="background:MistyRose">
+    <span class="fa-layers fa-fw fa-2x" style="background:MistyRose">
       <i class="fas fa-bookmark"></i>
       <i class="fa-inverse fas fa-heart" data-fa-transform="shrink-10 up-2" style="color:Tomato"></i>
     </span>
+
+<span class="fa-layers fa-fw fa-2x" style="background:MistyRose">
+<i class="fas fa-bookmark"></i>
+<i class="fa-inverse fas fa-heart" data-fa-transform="shrink-10 up-2" style="color:Tomato"></i>
+</span>
+
+Voila!
