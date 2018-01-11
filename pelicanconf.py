@@ -35,7 +35,7 @@ AUTHOR_FEED_RSS = None
 SOCIAL = (('twitter', 'http://twitter.com/j3hyde'),
         ('github', 'http://github.com/j3hyde'),)
 
-THEME = 'notmyidea'
+THEME = 'custom-theme'
 
 DEFAULT_PAGINATION = False
 
