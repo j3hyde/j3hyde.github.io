@@ -3,7 +3,10 @@ import fabric.contrib.project as project
 import os
 import shutil
 import sys
-import SocketServer
+if sys.version_info[0] == 2:
+    import SocketServer
+else:
+    import socketserver as SocketServer
 
 from pelican.server import ComplexHTTPRequestHandler
 
