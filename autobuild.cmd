@@ -1,0 +1,11 @@
+@echo off
+SET PY=python
+SET PELICAN=pelican
+SET PELICANOPTS=
+
+SET BASEDIR=%~dp0
+SET INPUTDIR=%BASEDIR%/content
+SET OUTPUTDIR=%BASEDIR%/output
+SET CONFFILE=%BASEDIR%/pelicanconf.py
+
+%PELICAN% --debug --autoreload -r %INPUTDIR% -o %OUTPUTDIR% -s %CONFFILE% %PELICANOPTS%
