@@ -1,9 +1,8 @@
-Title: Setting up Fontawesome 5 with Angular-CLI
+Title: Setting up Font Awesome 5 with Angular-CLI
 Category: articles
 Date: 2018-01-11 07:53:42
 Status: published
 
-# Intro
 I was recently building a simple app for a family member and went with [Angular](https://angular.io/).  I decided to use current versions of everything to get well up to speed so I grabbed [Angular-CLI](https://cli.angular.io/) and [Bootstrap 4](https://getbootstrap.com/).  On top of that I wanted an icon pack and [Font Awesome](http://fontawesome.io/) has always been a reliable goto.  Introducing [Font Awesome 5](https://fontawesome.com):  A total redesign and full support for SVG icons.  Trouble is there is little to no information on how best to get it set up with [Angular-CLI](https://cli.angular.io/).  Let's do that here....
 
 # Font Awesome 5 
